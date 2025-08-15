@@ -1,0 +1,54 @@
+[
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/layout_activity_settings.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/drawable_ic_walk.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/drawable/ic_walk.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/xml_data_extraction_rules.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/layout_dialog_custom_distance.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/layout/dialog_custom_distance.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/xml_backup_rules.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/layout_notification_layout.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/layout/notification_layout.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/layout_activity_history.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/layout/activity_history.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/layout_activity_main.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.gpssimulator.app-merged_res-51:/layout_item_route_history.xml.flat",
+        "source": "com.gpssimulator.app-main-53:/layout/item_route_history.xml"
+    }
+]

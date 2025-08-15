@@ -1,0 +1,513 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:2:1-57:12
+INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:2:1-57:12
+MERGED from [androidx.databinding:databinding-adapters:8.1.0] /home/neo/.gradle/caches/transforms-4/af93668dac5ec5aeea25f193201972b5/transformed/databinding-adapters-8.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.databinding:databinding-ktx:8.1.0] /home/neo/.gradle/caches/transforms-4/3d067b37c211ed0bedbac433663ea5dd/transformed/jetified-databinding-ktx-8.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.databinding:databinding-runtime:8.1.0] /home/neo/.gradle/caches/transforms-4/699a965c90909371fbaf90e66c1c2e34/transformed/databinding-runtime-8.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-location:21.2.0] /home/neo/.gradle/caches/transforms-4/68c626fae7eacc35ea63855201bea316/transformed/jetified-play-services-location-21.2.0/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.material:material:1.11.0] /home/neo/.gradle/caches/transforms-4/995110fdfb1808c59f8e3cb221a2331f/transformed/material-1.11.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/neo/.gradle/caches/transforms-4/0e5ba1697976d16ee8a19ce10209f7e9/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/neo/.gradle/caches/transforms-4/4cd4017d8b29ae7f7370ef2e160f2535/transformed/jetified-appcompat-resources-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.appcompat:appcompat:1.6.1] /home/neo/.gradle/caches/transforms-4/a5ecde120fd93f7f4416433756e59443/transformed/appcompat-1.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/neo/.gradle/caches/transforms-4/ceadc26ac448394d1d90a7186021a891/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /home/neo/.gradle/caches/transforms-4/1eeabba15c0e131c98d8fa43b0577ee7/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:16:1-26:12
+MERGED from [androidx.fragment:fragment:1.6.2] /home/neo/.gradle/caches/transforms-4/7de4ef75b3d805e96f80bcf2acb81355/transformed/fragment-1.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/neo/.gradle/caches/transforms-4/48a699a974c7a2dbd340d66c5e0e55f5/transformed/jetified-fragment-ktx-1.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.8.2] /home/neo/.gradle/caches/transforms-4/b780cd968d0211f6a5f0d81bd54d7cba/transformed/jetified-activity-1.8.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-ktx:1.8.2] /home/neo/.gradle/caches/transforms-4/003af8346f1ef318e9a1948d0c887a70/transformed/jetified-activity-ktx-1.8.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/neo/.gradle/caches/transforms-4/6a22e2a6d658c58b9ecac7f5b5ef0bba/transformed/jetified-emoji2-views-helper-1.2.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/neo/.gradle/caches/transforms-4/e4c6c8d407ae5a5e2937e568c7b86e05/transformed/jetified-savedstate-ktx-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/neo/.gradle/caches/transforms-4/85592137ef507fce3d45442a0022badd/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/neo/.gradle/caches/transforms-4/c7e2aaac84f26c0c85897c9128850fa8/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/neo/.gradle/caches/transforms-4/50d8d18187b75658f74ea2c7d29e6b64/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.12.0] /home/neo/.gradle/caches/transforms-4/3157a1280e396b0cc28e0231b9b6cbd6/transformed/jetified-core-ktx-1.12.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/neo/.gradle/caches/transforms-4/b60557c54eaa31c05612f7e30f371099/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/neo/.gradle/caches/transforms-4/1ed9107167ee196a3d4e8b0534a0130e/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/neo/.gradle/caches/transforms-4/e212e6b1b6592176c276d9a468fad6c0/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.2.0] /home/neo/.gradle/caches/transforms-4/e447d9d875d1c9bb337e9396f71d7852/transformed/transition-1.2.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/neo/.gradle/caches/transforms-4/9b0f5dd98297cade0bb3454ab326cca4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/neo/.gradle/caches/transforms-4/2486940630f586dc8b7c8af50ebff6ce/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/neo/.gradle/caches/transforms-4/203b092b8851e0cfaca579f3c81f7ec2/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/neo/.gradle/caches/transforms-4/7eff2081de64330b425860a39c0a8c1d/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.1.0] /home/neo/.gradle/caches/transforms-4/9fd5363e088450b9d9e33426eb0836b4/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/neo/.gradle/caches/transforms-4/39572ca4b15f10ae17a7105632cbf63a/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/neo/.gradle/caches/transforms-4/95472d05c9f54cbc44069e542c66b7b4/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/neo/.gradle/caches/transforms-4/f368b04be8f83ae633693437de6735d5/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/843e454ea6237920a627564fd77b5102/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/neo/.gradle/caches/transforms-4/f94d9d39954eb99b7b47f000cea0f980/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/neo/.gradle/caches/transforms-4/188e2f500ef69c9c11a9b6fb264eedc1/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.7.0] /home/neo/.gradle/caches/transforms-4/addd6f5458c0ff1d5a0682d3779942c3/transformed/jetified-lifecycle-service-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/436da6470fef6c520aa9d69ac7665fd4/transformed/jetified-lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/e49a5be830db1ab04c2eaded9e483629/transformed/jetified-lifecycle-livedata-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/682189801d2a8105f9ad52110fea5635/transformed/jetified-lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.room:room-ktx:2.6.1] /home/neo/.gradle/caches/transforms-4/5ae5a0433efd88917bb96777a1afe940/transformed/jetified-room-ktx-2.6.1/AndroidManifest.xml:17:1-22:12
+MERGED from [org.osmdroid:osmdroid-mapsforge:6.1.16] /home/neo/.gradle/caches/transforms-4/aba8c953533cc9a69d974da3d6375dd6/transformed/jetified-osmdroid-mapsforge-6.1.16/AndroidManifest.xml:2:1-9:12
+MERGED from [org.osmdroid:osmdroid-geopackage:6.1.16] /home/neo/.gradle/caches/transforms-4/1e56e9318f940bc143e90b3ddb9ece93/transformed/jetified-osmdroid-geopackage-6.1.16/AndroidManifest.xml:2:1-9:12
+MERGED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:2:1-27:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/neo/.gradle/caches/transforms-4/2b97ba903bd3a3e8e1b665e963101d00/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.databinding:viewbinding:8.1.0] /home/neo/.gradle/caches/transforms-4/7e0da751fbc082c4e389d394aaf55a7a/transformed/jetified-viewbinding-8.1.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /home/neo/.gradle/caches/transforms-4/47c3d6c9b832265d3eb82b9498b33d1b/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.sqlite:sqlite:2.4.0] /home/neo/.gradle/caches/transforms-4/f906a4ba89ace5f6a6a5d541e3a5ae1f/transformed/sqlite-2.4.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/neo/.gradle/caches/transforms-4/27c240b2763a2f3fe46223ed6f616ddd/transformed/jetified-annotation-experimental-1.3.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/neo/.gradle/caches/transforms-4/f266fa040d2acac86cf1e84078708cee/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/neo/.gradle/caches/transforms-4/a39e4a619ec701259fe0e7e019978cb5/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/neo/.gradle/caches/transforms-4/08261d2b62daede31d0528b06b99849f/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/neo/.gradle/caches/transforms-4/bc6e9e248e5edf5676c9bc58f3e503b0/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/neo/.gradle/caches/transforms-4/56c0e0ada77674a4b87d99da290e76a1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /home/neo/.gradle/caches/transforms-4/1b68faf3c572c6918f2f26328f984f2a/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:2:1-18:12
+MERGED from [androidx.documentfile:documentfile:1.0.1] /home/neo/.gradle/caches/transforms-4/fc650218d1968bee2b66b319dc138453/transformed/documentfile-1.0.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/neo/.gradle/caches/transforms-4/62ab1df0cf05fa9c8fd3c83a6e250a3e/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/neo/.gradle/caches/transforms-4/67f6e174c3ca282498759ec7698ca187/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [mil.nga:sqlite-android:3390300] /home/neo/.gradle/caches/transforms-4/4887ca0df9dd3145bf1c6a71d14f89fc/transformed/jetified-sqlite-android-3390300/AndroidManifest.xml:2:1-17:12
+	package
+		INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:6:5-79
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:6:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:7:5-81
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:7:22-78
+uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:8:5-85
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:8:22-82
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:9:5-77
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:9:22-74
+uses-permission#android.permission.INTERNET
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:10:5-67
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:10:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:11:5-79
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:11:22-76
+uses-permission#android.permission.WAKE_LOCK
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:12:5-68
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:12:22-65
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:13:5-81
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:13:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:14:5-80
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:14:22-77
+application
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:16:5-55:19
+INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:16:5-55:19
+MERGED from [com.google.android.gms:play-services-location:21.2.0] /home/neo/.gradle/caches/transforms-4/68c626fae7eacc35ea63855201bea316/transformed/jetified-play-services-location-21.2.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:21.2.0] /home/neo/.gradle/caches/transforms-4/68c626fae7eacc35ea63855201bea316/transformed/jetified-play-services-location-21.2.0/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.material:material:1.11.0] /home/neo/.gradle/caches/transforms-4/995110fdfb1808c59f8e3cb221a2331f/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.11.0] /home/neo/.gradle/caches/transforms-4/995110fdfb1808c59f8e3cb221a2331f/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/neo/.gradle/caches/transforms-4/0e5ba1697976d16ee8a19ce10209f7e9/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/neo/.gradle/caches/transforms-4/0e5ba1697976d16ee8a19ce10209f7e9/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /home/neo/.gradle/caches/transforms-4/1eeabba15c0e131c98d8fa43b0577ee7/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /home/neo/.gradle/caches/transforms-4/1eeabba15c0e131c98d8fa43b0577ee7/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:20:5-24:19
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/neo/.gradle/caches/transforms-4/2b97ba903bd3a3e8e1b665e963101d00/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/neo/.gradle/caches/transforms-4/2b97ba903bd3a3e8e1b665e963101d00/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/neo/.gradle/caches/transforms-4/56c0e0ada77674a4b87d99da290e76a1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/neo/.gradle/caches/transforms-4/56c0e0ada77674a4b87d99da290e76a1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:10:5-16:19
+MERGED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:10:5-16:19
+MERGED from [mil.nga:sqlite-android:3390300] /home/neo/.gradle/caches/transforms-4/4887ca0df9dd3145bf1c6a71d14f89fc/transformed/jetified-sqlite-android-3390300/AndroidManifest.xml:11:5-15:19
+MERGED from [mil.nga:sqlite-android:3390300] /home/neo/.gradle/caches/transforms-4/4887ca0df9dd3145bf1c6a71d14f89fc/transformed/jetified-sqlite-android-3390300/AndroidManifest.xml:11:5-15:19
+	android:extractNativeLibs
+		INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+	android:roundIcon
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:24:9-54
+	android:icon
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:22:9-43
+	android:fullBackupOnly
+		ADDED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:12:9-39
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:25:9-35
+	android:label
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:23:9-41
+	android:fullBackupContent
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:21:9-54
+	tools:targetApi
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:27:9-29
+	android:allowBackup
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:18:9-35
+		REJECTED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:11:9-36
+		REJECTED from [mil.nga:sqlite-android:3390300] /home/neo/.gradle/caches/transforms-4/4887ca0df9dd3145bf1c6a71d14f89fc/transformed/jetified-sqlite-android-3390300/AndroidManifest.xml:12:9-35
+	android:theme
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:26:9-50
+	android:dataExtractionRules
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:20:9-65
+	tools:replace
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:19:9-44
+	android:usesCleartextTraffic
+		ADDED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:14:9-44
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:17:9-39
+activity#com.gpssimulator.ui.main.MainActivity
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:29:9-37:20
+	android:exported
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:31:13-36
+	android:theme
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:32:13-54
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:30:13-49
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:33:13-36:29
+action#android.intent.action.MAIN
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:34:17-69
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:34:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:35:17-77
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:35:27-74
+activity#com.gpssimulator.ui.history.HistoryActivity
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:39:9-42:57
+	android:exported
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:41:13-37
+	android:theme
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:42:13-54
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:40:13-55
+activity#com.gpssimulator.ui.settings.SettingsActivity
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:44:9-47:57
+	android:exported
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:46:13-37
+	android:theme
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:47:13-54
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:45:13-57
+service#com.gpssimulator.service.LocationSimulationService
+ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:49:9-53:56
+	android:enabled
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:51:13-35
+	android:exported
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:52:13-37
+	android:foregroundServiceType
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:53:13-53
+	android:name
+		ADDED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:50:13-62
+uses-sdk
+INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+MERGED from [androidx.databinding:databinding-adapters:8.1.0] /home/neo/.gradle/caches/transforms-4/af93668dac5ec5aeea25f193201972b5/transformed/databinding-adapters-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:databinding-adapters:8.1.0] /home/neo/.gradle/caches/transforms-4/af93668dac5ec5aeea25f193201972b5/transformed/databinding-adapters-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:databinding-ktx:8.1.0] /home/neo/.gradle/caches/transforms-4/3d067b37c211ed0bedbac433663ea5dd/transformed/jetified-databinding-ktx-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:databinding-ktx:8.1.0] /home/neo/.gradle/caches/transforms-4/3d067b37c211ed0bedbac433663ea5dd/transformed/jetified-databinding-ktx-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:databinding-runtime:8.1.0] /home/neo/.gradle/caches/transforms-4/699a965c90909371fbaf90e66c1c2e34/transformed/databinding-runtime-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:databinding-runtime:8.1.0] /home/neo/.gradle/caches/transforms-4/699a965c90909371fbaf90e66c1c2e34/transformed/databinding-runtime-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:21.2.0] /home/neo/.gradle/caches/transforms-4/68c626fae7eacc35ea63855201bea316/transformed/jetified-play-services-location-21.2.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:21.2.0] /home/neo/.gradle/caches/transforms-4/68c626fae7eacc35ea63855201bea316/transformed/jetified-play-services-location-21.2.0/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.material:material:1.11.0] /home/neo/.gradle/caches/transforms-4/995110fdfb1808c59f8e3cb221a2331f/transformed/material-1.11.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.11.0] /home/neo/.gradle/caches/transforms-4/995110fdfb1808c59f8e3cb221a2331f/transformed/material-1.11.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/neo/.gradle/caches/transforms-4/0e5ba1697976d16ee8a19ce10209f7e9/transformed/constraintlayout-2.1.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/neo/.gradle/caches/transforms-4/0e5ba1697976d16ee8a19ce10209f7e9/transformed/constraintlayout-2.1.4/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/neo/.gradle/caches/transforms-4/4cd4017d8b29ae7f7370ef2e160f2535/transformed/jetified-appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] /home/neo/.gradle/caches/transforms-4/4cd4017d8b29ae7f7370ef2e160f2535/transformed/jetified-appcompat-resources-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] /home/neo/.gradle/caches/transforms-4/a5ecde120fd93f7f4416433756e59443/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.6.1] /home/neo/.gradle/caches/transforms-4/a5ecde120fd93f7f4416433756e59443/transformed/appcompat-1.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/neo/.gradle/caches/transforms-4/ceadc26ac448394d1d90a7186021a891/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/neo/.gradle/caches/transforms-4/ceadc26ac448394d1d90a7186021a891/transformed/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /home/neo/.gradle/caches/transforms-4/1eeabba15c0e131c98d8fa43b0577ee7/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] /home/neo/.gradle/caches/transforms-4/1eeabba15c0e131c98d8fa43b0577ee7/transformed/jetified-play-services-tasks-18.1.0/AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:18:5-43
+MERGED from [androidx.fragment:fragment:1.6.2] /home/neo/.gradle/caches/transforms-4/7de4ef75b3d805e96f80bcf2acb81355/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.6.2] /home/neo/.gradle/caches/transforms-4/7de4ef75b3d805e96f80bcf2acb81355/transformed/fragment-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/neo/.gradle/caches/transforms-4/48a699a974c7a2dbd340d66c5e0e55f5/transformed/jetified-fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.6.2] /home/neo/.gradle/caches/transforms-4/48a699a974c7a2dbd340d66c5e0e55f5/transformed/jetified-fragment-ktx-1.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.8.2] /home/neo/.gradle/caches/transforms-4/b780cd968d0211f6a5f0d81bd54d7cba/transformed/jetified-activity-1.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.8.2] /home/neo/.gradle/caches/transforms-4/b780cd968d0211f6a5f0d81bd54d7cba/transformed/jetified-activity-1.8.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.8.2] /home/neo/.gradle/caches/transforms-4/003af8346f1ef318e9a1948d0c887a70/transformed/jetified-activity-ktx-1.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.8.2] /home/neo/.gradle/caches/transforms-4/003af8346f1ef318e9a1948d0c887a70/transformed/jetified-activity-ktx-1.8.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/neo/.gradle/caches/transforms-4/6a22e2a6d658c58b9ecac7f5b5ef0bba/transformed/jetified-emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] /home/neo/.gradle/caches/transforms-4/6a22e2a6d658c58b9ecac7f5b5ef0bba/transformed/jetified-emoji2-views-helper-1.2.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/neo/.gradle/caches/transforms-4/e4c6c8d407ae5a5e2937e568c7b86e05/transformed/jetified-savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] /home/neo/.gradle/caches/transforms-4/e4c6c8d407ae5a5e2937e568c7b86e05/transformed/jetified-savedstate-ktx-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/neo/.gradle/caches/transforms-4/85592137ef507fce3d45442a0022badd/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /home/neo/.gradle/caches/transforms-4/85592137ef507fce3d45442a0022badd/transformed/jetified-savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/neo/.gradle/caches/transforms-4/c7e2aaac84f26c0c85897c9128850fa8/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.7.0] /home/neo/.gradle/caches/transforms-4/c7e2aaac84f26c0c85897c9128850fa8/transformed/lifecycle-livedata-core-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/neo/.gradle/caches/transforms-4/50d8d18187b75658f74ea2c7d29e6b64/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0] /home/neo/.gradle/caches/transforms-4/50d8d18187b75658f74ea2c7d29e6b64/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.12.0] /home/neo/.gradle/caches/transforms-4/3157a1280e396b0cc28e0231b9b6cbd6/transformed/jetified-core-ktx-1.12.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.12.0] /home/neo/.gradle/caches/transforms-4/3157a1280e396b0cc28e0231b9b6cbd6/transformed/jetified-core-ktx-1.12.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/neo/.gradle/caches/transforms-4/b60557c54eaa31c05612f7e30f371099/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /home/neo/.gradle/caches/transforms-4/b60557c54eaa31c05612f7e30f371099/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/neo/.gradle/caches/transforms-4/1ed9107167ee196a3d4e8b0534a0130e/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /home/neo/.gradle/caches/transforms-4/1ed9107167ee196a3d4e8b0534a0130e/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/neo/.gradle/caches/transforms-4/e212e6b1b6592176c276d9a468fad6c0/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /home/neo/.gradle/caches/transforms-4/e212e6b1b6592176c276d9a468fad6c0/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.2.0] /home/neo/.gradle/caches/transforms-4/e447d9d875d1c9bb337e9396f71d7852/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] /home/neo/.gradle/caches/transforms-4/e447d9d875d1c9bb337e9396f71d7852/transformed/transition-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/neo/.gradle/caches/transforms-4/9b0f5dd98297cade0bb3454ab326cca4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /home/neo/.gradle/caches/transforms-4/9b0f5dd98297cade0bb3454ab326cca4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/neo/.gradle/caches/transforms-4/2486940630f586dc8b7c8af50ebff6ce/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /home/neo/.gradle/caches/transforms-4/2486940630f586dc8b7c8af50ebff6ce/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/neo/.gradle/caches/transforms-4/203b092b8851e0cfaca579f3c81f7ec2/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/neo/.gradle/caches/transforms-4/203b092b8851e0cfaca579f3c81f7ec2/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/neo/.gradle/caches/transforms-4/7eff2081de64330b425860a39c0a8c1d/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/neo/.gradle/caches/transforms-4/7eff2081de64330b425860a39c0a8c1d/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.1.0] /home/neo/.gradle/caches/transforms-4/9fd5363e088450b9d9e33426eb0836b4/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /home/neo/.gradle/caches/transforms-4/9fd5363e088450b9d9e33426eb0836b4/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/neo/.gradle/caches/transforms-4/39572ca4b15f10ae17a7105632cbf63a/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/neo/.gradle/caches/transforms-4/39572ca4b15f10ae17a7105632cbf63a/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/neo/.gradle/caches/transforms-4/95472d05c9f54cbc44069e542c66b7b4/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/neo/.gradle/caches/transforms-4/95472d05c9f54cbc44069e542c66b7b4/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/neo/.gradle/caches/transforms-4/f368b04be8f83ae633693437de6735d5/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] /home/neo/.gradle/caches/transforms-4/f368b04be8f83ae633693437de6735d5/transformed/lifecycle-runtime-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/843e454ea6237920a627564fd77b5102/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/843e454ea6237920a627564fd77b5102/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/neo/.gradle/caches/transforms-4/f94d9d39954eb99b7b47f000cea0f980/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.7.0] /home/neo/.gradle/caches/transforms-4/f94d9d39954eb99b7b47f000cea0f980/transformed/lifecycle-livedata-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/neo/.gradle/caches/transforms-4/188e2f500ef69c9c11a9b6fb264eedc1/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] /home/neo/.gradle/caches/transforms-4/188e2f500ef69c9c11a9b6fb264eedc1/transformed/lifecycle-viewmodel-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.7.0] /home/neo/.gradle/caches/transforms-4/addd6f5458c0ff1d5a0682d3779942c3/transformed/jetified-lifecycle-service-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.7.0] /home/neo/.gradle/caches/transforms-4/addd6f5458c0ff1d5a0682d3779942c3/transformed/jetified-lifecycle-service-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/436da6470fef6c520aa9d69ac7665fd4/transformed/jetified-lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/436da6470fef6c520aa9d69ac7665fd4/transformed/jetified-lifecycle-runtime-ktx-2.7.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/e49a5be830db1ab04c2eaded9e483629/transformed/jetified-lifecycle-livedata-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/e49a5be830db1ab04c2eaded9e483629/transformed/jetified-lifecycle-livedata-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/682189801d2a8105f9ad52110fea5635/transformed/jetified-lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] /home/neo/.gradle/caches/transforms-4/682189801d2a8105f9ad52110fea5635/transformed/jetified-lifecycle-viewmodel-ktx-2.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-ktx:2.6.1] /home/neo/.gradle/caches/transforms-4/5ae5a0433efd88917bb96777a1afe940/transformed/jetified-room-ktx-2.6.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.6.1] /home/neo/.gradle/caches/transforms-4/5ae5a0433efd88917bb96777a1afe940/transformed/jetified-room-ktx-2.6.1/AndroidManifest.xml:20:5-44
+MERGED from [org.osmdroid:osmdroid-mapsforge:6.1.16] /home/neo/.gradle/caches/transforms-4/aba8c953533cc9a69d974da3d6375dd6/transformed/jetified-osmdroid-mapsforge-6.1.16/AndroidManifest.xml:5:5-7:41
+MERGED from [org.osmdroid:osmdroid-mapsforge:6.1.16] /home/neo/.gradle/caches/transforms-4/aba8c953533cc9a69d974da3d6375dd6/transformed/jetified-osmdroid-mapsforge-6.1.16/AndroidManifest.xml:5:5-7:41
+MERGED from [org.osmdroid:osmdroid-geopackage:6.1.16] /home/neo/.gradle/caches/transforms-4/1e56e9318f940bc143e90b3ddb9ece93/transformed/jetified-osmdroid-geopackage-6.1.16/AndroidManifest.xml:5:5-7:41
+MERGED from [org.osmdroid:osmdroid-geopackage:6.1.16] /home/neo/.gradle/caches/transforms-4/1e56e9318f940bc143e90b3ddb9ece93/transformed/jetified-osmdroid-geopackage-6.1.16/AndroidManifest.xml:5:5-7:41
+MERGED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:5:5-7:41
+MERGED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/neo/.gradle/caches/transforms-4/2b97ba903bd3a3e8e1b665e963101d00/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /home/neo/.gradle/caches/transforms-4/2b97ba903bd3a3e8e1b665e963101d00/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.databinding:viewbinding:8.1.0] /home/neo/.gradle/caches/transforms-4/7e0da751fbc082c4e389d394aaf55a7a/transformed/jetified-viewbinding-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.1.0] /home/neo/.gradle/caches/transforms-4/7e0da751fbc082c4e389d394aaf55a7a/transformed/jetified-viewbinding-8.1.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /home/neo/.gradle/caches/transforms-4/47c3d6c9b832265d3eb82b9498b33d1b/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.4.0] /home/neo/.gradle/caches/transforms-4/47c3d6c9b832265d3eb82b9498b33d1b/transformed/sqlite-framework-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /home/neo/.gradle/caches/transforms-4/f906a4ba89ace5f6a6a5d541e3a5ae1f/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.4.0] /home/neo/.gradle/caches/transforms-4/f906a4ba89ace5f6a6a5d541e3a5ae1f/transformed/sqlite-2.4.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/neo/.gradle/caches/transforms-4/27c240b2763a2f3fe46223ed6f616ddd/transformed/jetified-annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] /home/neo/.gradle/caches/transforms-4/27c240b2763a2f3fe46223ed6f616ddd/transformed/jetified-annotation-experimental-1.3.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/neo/.gradle/caches/transforms-4/f266fa040d2acac86cf1e84078708cee/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/neo/.gradle/caches/transforms-4/f266fa040d2acac86cf1e84078708cee/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/neo/.gradle/caches/transforms-4/a39e4a619ec701259fe0e7e019978cb5/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/neo/.gradle/caches/transforms-4/a39e4a619ec701259fe0e7e019978cb5/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/neo/.gradle/caches/transforms-4/08261d2b62daede31d0528b06b99849f/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /home/neo/.gradle/caches/transforms-4/08261d2b62daede31d0528b06b99849f/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/neo/.gradle/caches/transforms-4/bc6e9e248e5edf5676c9bc58f3e503b0/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/neo/.gradle/caches/transforms-4/bc6e9e248e5edf5676c9bc58f3e503b0/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/neo/.gradle/caches/transforms-4/56c0e0ada77674a4b87d99da290e76a1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/neo/.gradle/caches/transforms-4/56c0e0ada77674a4b87d99da290e76a1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/neo/.gradle/caches/transforms-4/1b68faf3c572c6918f2f26328f984f2a/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /home/neo/.gradle/caches/transforms-4/1b68faf3c572c6918f2f26328f984f2a/transformed/jetified-tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:6:5-8:41
+MERGED from [mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:6:5-8:41
+MERGED from [androidx.documentfile:documentfile:1.0.1] /home/neo/.gradle/caches/transforms-4/fc650218d1968bee2b66b319dc138453/transformed/documentfile-1.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.1] /home/neo/.gradle/caches/transforms-4/fc650218d1968bee2b66b319dc138453/transformed/documentfile-1.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/neo/.gradle/caches/transforms-4/62ab1df0cf05fa9c8fd3c83a6e250a3e/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/neo/.gradle/caches/transforms-4/62ab1df0cf05fa9c8fd3c83a6e250a3e/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/neo/.gradle/caches/transforms-4/67f6e174c3ca282498759ec7698ca187/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/neo/.gradle/caches/transforms-4/67f6e174c3ca282498759ec7698ca187/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [mil.nga:sqlite-android:3390300] /home/neo/.gradle/caches/transforms-4/4887ca0df9dd3145bf1c6a71d14f89fc/transformed/jetified-sqlite-android-3390300/AndroidManifest.xml:7:5-9:41
+MERGED from [mil.nga:sqlite-android:3390300] /home/neo/.gradle/caches/transforms-4/4887ca0df9dd3145bf1c6a71d14f89fc/transformed/jetified-sqlite-android-3390300/AndroidManifest.xml:7:5-9:41
+	android:targetSdkVersion
+		INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:20:9-22:45
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:22:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:21:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:20:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:22:13-58
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/neo/.gradle/caches/transforms-4/56c0e0ada77674a4b87d99da290e76a1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /home/neo/.gradle/caches/transforms-4/56c0e0ada77674a4b87d99da290e76a1/transformed/jetified-startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+permission#com.example.gpssimulator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+uses-permission#com.example.gpssimulator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:28:13-60
+	android:directBootAware
+		ADDED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+	android:name
+		ADDED from [androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+supports-screens
+ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:9:5-12:40
+	android:largeScreens
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:11:9-36
+	android:normalScreens
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:12:9-37
+	android:anyDensity
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:10:9-34
+uses-feature#android.hardware.location.network
+ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:14:5-16:36
+	android:required
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:16:9-33
+	android:name
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:15:9-57
+uses-feature#android.hardware.location.gps
+ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:17:5-19:36
+	android:required
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:19:9-33
+	android:name
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:18:9-53
+uses-feature#android.hardware.telephony
+ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:20:5-22:36
+	android:required
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:22:9-33
+	android:name
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:21:9-50
+uses-feature#android.hardware.wifi
+ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:23:5-25:36
+	android:required
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:25:9-33
+	android:name
+		ADDED from [org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:24:9-45
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92

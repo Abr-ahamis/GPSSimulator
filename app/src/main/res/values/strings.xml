@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">GPS Simulator</string>
+    <string name="title_activity_main">GPS Simulator</string>
+    <string name="title_activity_history">Route History</string>
+    <string name="title_activity_settings">Settings</string>
+    
+    <!-- Main Activity -->
+    <string name="start_simulation">Start Simulation</string>
+    <string name="stop_simulation">Stop Simulation</string>
+    <string name="current_location">Current Location</string>
+    <string name="history">History</string>
+    <string name="settings">Settings</string>
+    
+    <!-- Distance Options -->
+    <string name="distance_5km">5 km</string>
+    <string name="distance_10km">10 km</string>
+    <string name="distance_custom">Custom</string>
+    
+    <!-- Movement Types -->
+    <string name="movement_walking">Walking</string>
+    <string name="movement_running">Running</string>
+    <string name="movement_cycling">Cycling</string>
+    
+    <!-- Route Types -->
+    <string name="route_circular">Circular</string>
+    <string name="route_random">Random</string>
+    
+    <!-- History -->
+    <string name="clear_history">Clear History</string>
+    <string name="empty_history">No completed routes yet</string>
+    <string name="route_completed">Completed</string>
+    <string name="route_incomplete">Incomplete</string>
+    
+    <!-- Settings -->
+    <string name="mock_location">Mock Location</string>
+    <string name="mock_location_desc">Enable mock location in Developer Options</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_desc">Show notifications during simulation</string>
+    <string name="speed_variation">Speed Variation</string>
+    <string name="speed_variation_desc">Adjust the randomness of movement speed</string>
+    
+    <!-- Permissions -->
+    <string name="location_permission_required">Location permission is required</string>
+    <string name="background_location_permission_required">Background location permission recommended</string>
+    <string name="enable_gps">Please enable GPS</string>
+    <string name="enable_mock_location">Please enable mock location in developer options</string>
+    
+    <!-- Notifications -->
+    <string name="simulation_running">Simulation running</string>
+    <string name="simulation_completed">Simulation completed</string>
+    <string name="simulation_stopped">Simulation stopped</string>
+    
+    <!-- Errors -->
+    <string name="error_getting_location">Failed to get current location</string>
+    <string name="error_generating_route">Failed to generate route</string>
+</resources>

@@ -1,0 +1,252 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.gpssimulator"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Location permissions -->
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:6:5-79
+12-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+13-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:7:5-81
+13-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:7:22-78
+14    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+14-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:8:5-85
+14-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:8:22-82
+15    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+15-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:9:5-77
+15-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:9:22-74
+16    <uses-permission android:name="android.permission.INTERNET" />
+16-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:10:5-67
+16-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:10:22-64
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+17-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:11:5-79
+17-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:11:22-76
+18    <uses-permission android:name="android.permission.WAKE_LOCK" />
+18-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:12:5-68
+18-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:12:22-65
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+19-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:13:5-81
+19-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:13:22-78
+20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+20-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:14:5-80
+20-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:14:22-77
+21
+22    <permission
+22-->[androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+23        android:name="com.example.gpssimulator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+23-->[androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+24        android:protectionLevel="signature" />
+24-->[androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+25
+26    <uses-permission android:name="com.example.gpssimulator.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+26-->[androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+26-->[androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+27
+28    <supports-screens
+28-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:9:5-12:40
+29        android:anyDensity="true"
+29-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:10:9-34
+30        android:largeScreens="true"
+30-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:11:9-36
+31        android:normalScreens="true" />
+31-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:12:9-37
+32
+33    <uses-feature
+33-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:14:5-16:36
+34        android:name="android.hardware.location.network"
+34-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:15:9-57
+35        android:required="false" />
+35-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:16:9-33
+36    <uses-feature
+36-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:17:5-19:36
+37        android:name="android.hardware.location.gps"
+37-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:18:9-53
+38        android:required="false" />
+38-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:19:9-33
+39    <uses-feature
+39-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:20:5-22:36
+40        android:name="android.hardware.telephony"
+40-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:21:9-50
+41        android:required="false" />
+41-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:22:9-33
+42    <uses-feature
+42-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:23:5-25:36
+43        android:name="android.hardware.wifi"
+43-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:24:9-45
+44        android:required="false" />
+44-->[org.osmdroid:osmdroid-android:6.1.16] /home/neo/.gradle/caches/transforms-4/45b3b5fef676365e4e99135e2a0eb743/transformed/jetified-osmdroid-android-6.1.16/AndroidManifest.xml:25:9-33
+45
+46    <application
+46-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:16:5-55:19
+47        android:name="com.gpssimulator.GPSimulatorApp"
+47-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:17:9-39
+48        android:allowBackup="true"
+48-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:18:9-35
+49        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+49-->[androidx.core:core:1.12.0] /home/neo/.gradle/caches/transforms-4/434bdaff6db880fae307be2b9130e9e9/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+50        android:dataExtractionRules="@xml/data_extraction_rules"
+50-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:20:9-65
+51        android:debuggable="true"
+52        android:extractNativeLibs="false"
+53        android:fullBackupContent="@xml/backup_rules"
+53-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:21:9-54
+54        android:fullBackupOnly="false"
+54-->[mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:12:9-39
+55        android:icon="@mipmap/ic_launcher"
+55-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:22:9-43
+56        android:label="@string/app_name"
+56-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:23:9-41
+57        android:roundIcon="@mipmap/ic_launcher_round"
+57-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:24:9-54
+58        android:supportsRtl="true"
+58-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:25:9-35
+59        android:theme="@style/Theme.GPSSimulator"
+59-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:26:9-50
+60        android:usesCleartextTraffic="true" >
+60-->[mil.nga.geopackage:geopackage-android:6.6.0] /home/neo/.gradle/caches/transforms-4/c9e2cd6d591d79199989b75b60a72560/transformed/jetified-geopackage-android-6.6.0/AndroidManifest.xml:14:9-44
+61        <activity
+61-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:29:9-37:20
+62            android:name="com.gpssimulator.ui.main.MainActivity"
+62-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:30:13-49
+63            android:exported="true"
+63-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:31:13-36
+64            android:theme="@style/Theme.GPSSimulator" >
+64-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:32:13-54
+65            <intent-filter>
+65-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:33:13-36:29
+66                <action android:name="android.intent.action.MAIN" />
+66-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:34:17-69
+66-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:34:25-66
+67
+68                <category android:name="android.intent.category.LAUNCHER" />
+68-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:35:17-77
+68-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:35:27-74
+69            </intent-filter>
+70        </activity>
+71        <activity
+71-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:39:9-42:57
+72            android:name="com.gpssimulator.ui.history.HistoryActivity"
+72-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:40:13-55
+73            android:exported="false"
+73-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:41:13-37
+74            android:theme="@style/Theme.GPSSimulator" />
+74-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:42:13-54
+75        <activity
+75-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:44:9-47:57
+76            android:name="com.gpssimulator.ui.settings.SettingsActivity"
+76-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:45:13-57
+77            android:exported="false"
+77-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:46:13-37
+78            android:theme="@style/Theme.GPSSimulator" />
+78-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:47:13-54
+79
+80        <service
+80-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:49:9-53:56
+81            android:name="com.gpssimulator.service.LocationSimulationService"
+81-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:50:13-62
+82            android:enabled="true"
+82-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:51:13-35
+83            android:exported="false"
+83-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:52:13-37
+84            android:foregroundServiceType="location" />
+84-->/home/neo/pro/app/GPSSimulator/app/src/main/AndroidManifest.xml:53:13-53
+85
+86        <activity
+86-->[com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:20:9-22:45
+87            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+87-->[com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:20:19-85
+88            android:exported="false"
+88-->[com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:22:19-43
+89            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+89-->[com.google.android.gms:play-services-base:18.3.0] /home/neo/.gradle/caches/transforms-4/7e7af854f98608c37d62834f3df65525/transformed/jetified-play-services-base-18.3.0/AndroidManifest.xml:21:19-78
+90
+91        <meta-data
+91-->[com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:21:9-23:69
+92            android:name="com.google.android.gms.version"
+92-->[com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:22:13-58
+93            android:value="@integer/google_play_services_version" />
+93-->[com.google.android.gms:play-services-basement:18.3.0] /home/neo/.gradle/caches/transforms-4/ea843250734d3731ded0dc2f3aef6119/transformed/jetified-play-services-basement-18.3.0/AndroidManifest.xml:23:13-66
+94
+95        <provider
+95-->[androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+96            android:name="androidx.startup.InitializationProvider"
+96-->[androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+97            android:authorities="com.example.gpssimulator.androidx-startup"
+97-->[androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+98            android:exported="false" >
+98-->[androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+99            <meta-data
+99-->[androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+100                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+100-->[androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+101                android:value="androidx.startup" />
+101-->[androidx.emoji2:emoji2:1.2.0] /home/neo/.gradle/caches/transforms-4/1d9f0e0decd0e3c87c0c73122abe93fa/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+102            <meta-data
+102-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:29:13-31:52
+103                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+103-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:30:17-78
+104                android:value="androidx.startup" />
+104-->[androidx.lifecycle:lifecycle-process:2.7.0] /home/neo/.gradle/caches/transforms-4/b1028432d32d6bb414c5c3cc933f407c/transformed/jetified-lifecycle-process-2.7.0/AndroidManifest.xml:31:17-49
+105            <meta-data
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+106                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+107                android:value="androidx.startup" />
+107-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+108        </provider>
+109
+110        <service
+110-->[androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:24:9-28:63
+111            android:name="androidx.room.MultiInstanceInvalidationService"
+111-->[androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:25:13-74
+112            android:directBootAware="true"
+112-->[androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:26:13-43
+113            android:exported="false" />
+113-->[androidx.room:room-runtime:2.6.1] /home/neo/.gradle/caches/transforms-4/203638ed11ea1dd1e6255d55cf91bce6/transformed/room-runtime-2.6.1/AndroidManifest.xml:27:13-37
+114
+115        <receiver
+115-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+116            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+116-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+117            android:directBootAware="false"
+117-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+118            android:enabled="true"
+118-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+119            android:exported="true"
+119-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+120            android:permission="android.permission.DUMP" >
+120-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+121            <intent-filter>
+121-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+122                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+122-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+122-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+123            </intent-filter>
+124            <intent-filter>
+124-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+125                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+125-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+125-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+126            </intent-filter>
+127            <intent-filter>
+127-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+128                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+128-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+128-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+129            </intent-filter>
+130            <intent-filter>
+130-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+131                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+131-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+131-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/neo/.gradle/caches/transforms-4/1c383e2244f46c1ea2e8bb96840933a3/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+132            </intent-filter>
+133        </receiver>
+134    </application>
+135
+136</manifest>
