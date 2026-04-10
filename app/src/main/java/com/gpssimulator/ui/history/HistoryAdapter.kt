@@ -2,12 +2,12 @@ package com.gpssimulator.ui.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gpssimulator.R
 import com.gpssimulator.data.database.RouteEntity
-import com.gpssimulator.data.model.MovementType
 import com.gpssimulator.databinding.ItemRouteHistoryBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,13 +38,13 @@ class HistoryAdapter(
             binding.apply {
                 routeNameTextView.text = route.name
                 routeDistanceTextView.text = "${route.totalDistance.toInt()}m"
-                routeTypeTextView.text = route.movementType.name
+                routeTypeTextView.text = formatPace(route.basePaceSeconds)
                 routeDateTextView.text = formatDate(route.createdAt)
                 routeStatusTextView.text = if (route.isCompleted) "Completed" else "Incomplete"
                 
                 // Set status color
                 routeStatusTextView.setTextColor(
-                    android.content.ContextCompat.getColor(
+                    ContextCompat.getColor(
                         root.context,
                         if (route.isCompleted) android.R.color.holo_green_dark else android.R.color.holo_orange_dark
                     )
@@ -79,6 +79,12 @@ class HistoryAdapter(
                 minutes > 0 -> "${minutes}m ${seconds % 60}s"
                 else -> "${seconds}s"
             }
+        }
+
+        private fun formatPace(basePaceSeconds: Int): String {
+            val minutes = basePaceSeconds / 60
+            val seconds = basePaceSeconds % 60
+            return String.format(Locale.getDefault(), "%02d:%02d/km", minutes, seconds)
         }
     }
     

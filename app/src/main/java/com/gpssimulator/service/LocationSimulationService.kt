@@ -10,22 +10,20 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Build
 import android.os.IBinder
-import android.os.Looper
 import androidx.core.app.NotificationCompat
 import com.gpssimulator.GPSimulatorApp
 import com.gpssimulator.R
 import com.gpssimulator.data.model.LocationPoint
 import com.gpssimulator.data.model.Route
+import com.gpssimulator.location.RouteEngine
 import com.gpssimulator.utils.NotificationHelper
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.util.concurrent.TimeUnit
 import kotlin.math.*
 
 class LocationSimulationService : Service() {
@@ -33,16 +31,17 @@ class LocationSimulationService : Service() {
     private val serviceScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationManager: LocationManager
-    private lateinit var routeGenerator: RouteGenerator
     
     private var simulationJob: Job? = null
     private var currentRoute: Route? = null
-    private var currentPointIndex = 0
-    private var allRoutePoints = listOf<LocationPoint>()
+    private var routeEngine: RouteEngine? = null
     private var startTime = 0L
     
     private val _isSimulating = MutableStateFlow(false)
     val isSimulating: StateFlow<Boolean> = _isSimulating
+
+    private val _isPaused = MutableStateFlow(false)
+    val isPaused: StateFlow<Boolean> = _isPaused
     
     private val _currentLocation = MutableStateFlow<LocationPoint?>(null)
     val currentLocation: StateFlow<LocationPoint?> = _currentLocation
@@ -51,12 +50,12 @@ class LocationSimulationService : Service() {
     val progress: StateFlow<Float> = _progress
     
     private lateinit var locationCallback: LocationCallback
+    private var mockProviderRegistered = false
     
     override fun onCreate() {
         super.onCreate()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        routeGenerator = RouteGenerator()
         
         setupLocationCallback()
         startForeground(NOTIFICATION_ID, createNotification())
@@ -65,12 +64,17 @@ class LocationSimulationService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         when (intent?.action) {
             ACTION_START_SIMULATION -> {
-                val route = intent.getParcelableExtra<Route>("route")
+                val route = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    intent.getParcelableExtra("route", Route::class.java)
+                } else {
+                    @Suppress("DEPRECATION")
+                    intent.getParcelableExtra("route")
+                }
                 route?.let { startSimulation(it) }
             }
-            ACTION_STOP_SIMULATION -> {
-                stopSimulation()
-            }
+            "pause_simulation" -> pauseSimulation()
+            "resume_simulation" -> resumeSimulation()
+            ACTION_STOP_SIMULATION -> stopSimulation()
         }
         return START_STICKY
     }
@@ -78,9 +82,7 @@ class LocationSimulationService : Service() {
     private fun setupLocationCallback() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                locationResult.lastLocation?.let { location ->
-                    // We might want to track real location for reference
-                }
+                // Tracking if needed
             }
         }
     }
@@ -89,117 +91,104 @@ class LocationSimulationService : Service() {
         if (_isSimulating.value) return
         
         currentRoute = route
-        allRoutePoints = route.getAllPoints()
-        currentPointIndex = 0
+        routeEngine = RouteEngine(route)
         startTime = System.currentTimeMillis()
         
         _isSimulating.value = true
+        _isPaused.value = false
+        SimulationState.setSimulating(true)
+        SimulationState.setPaused(false)
+        SimulationState.setProgress(0f)
         updateNotification("Simulating ${route.name}")
         
+        launchSimulationLoop()
+    }
+    
+    private fun launchSimulationLoop() {
+        simulationJob?.cancel()
         simulationJob = serviceScope.launch {
             simulateRoute()
         }
     }
-    
-    private suspend fun simulateRoute() {
-        val route = currentRoute ?: return
-        
-        while (currentPointIndex < allRoutePoints.size && _isSimulating.value) {
-            val currentPoint = allRoutePoints[currentPointIndex]
-            
-            // Set mock location
-            setMockLocation(currentPoint)
-            _currentLocation.value = currentPoint
-            
-            // Update progress
-            val progress = (currentPointIndex.toFloat() / allRoutePoints.size.toFloat()) * 100
-            _progress.value = progress
-            
-            // Calculate delay based on speed and distance to next point
-            val delay = calculateDelayToNextPoint(currentPointIndex)
-            
-            // Add some randomness to make it more natural
-            val randomDelay = (delay * (0.8 + Math.random() * 0.4)).toLong()
-            
-            delay(randomDelay)
-            currentPointIndex++
-        }
-        
-        // Route completed
-        completeSimulation()
+
+    private fun pauseSimulation() {
+        _isPaused.value = true
+        SimulationState.setPaused(true)
+        simulationJob?.cancel()
+        updateNotification("Simulation Paused")
+    }
+
+    private fun resumeSimulation() {
+        _isPaused.value = false
+        SimulationState.setPaused(false)
+        updateNotification("Simulation Resumed")
+        launchSimulationLoop()
     }
     
-    private fun calculateDelayToNextPoint(pointIndex: Int): Long {
-        if (pointIndex >= allRoutePoints.size - 1) return 1000L
+    private suspend fun simulateRoute() {
+        val engine = routeEngine ?: return
         
-        val currentPoint = allRoutePoints[pointIndex]
-        val nextPoint = allRoutePoints[pointIndex + 1]
+        while (engine.hasNext() && _isSimulating.value && !_isPaused.value) {
+            val step = engine.getNextStep()
+            if (step.delayBeforeMs > 0) {
+                delay(step.delayBeforeMs)
+            }
+            if (!_isSimulating.value || _isPaused.value) {
+                break
+            }
+            val currentPoint = step.point
+            
+            setMockLocation(currentPoint)
+            _currentLocation.value = currentPoint
+            SimulationState.setCurrentLocation(currentPoint)
+            
+            val progress = engine.getProgress()
+            _progress.value = progress
+            SimulationState.setProgress(progress)
+        }
         
-        val distance = calculateDistance(currentPoint, nextPoint)
-        val speed = currentPoint.speed.takeIf { it > 0 } ?: currentRoute?.movementType?.baseSpeed ?: 1.4f
-        
-        return (distance / speed * 1000).toLong()
+        if (!engine.hasNext()) {
+            completeSimulation()
+        }
     }
     
     private fun setMockLocation(locationPoint: LocationPoint) {
         try {
             val mockLocation = locationPoint.toLocation()
-            
-            // Add test provider if not exists
-            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                locationManager.addTestProvider(
-                    LocationManager.GPS_PROVIDER,
-                    false,
-                    false,
-                    false,
-                    false,
-                    true,
-                    true,
-                    true,
-                    0,
-                    0
-                )
+            fusedLocationClient.setMockMode(true)
+            fusedLocationClient.setMockLocation(mockLocation)
+
+            if (!mockProviderRegistered) {
+                try {
+                    locationManager.addTestProvider(
+                        LocationManager.GPS_PROVIDER,
+                        false, false, false, false,
+                        true, true, true, 0, 5
+                    )
+                    mockProviderRegistered = true
+                } catch (_: Exception) {
+                    // Some devices reject replacing the built-in GPS provider.
+                }
             }
-            
-            locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, true)
-            locationManager.setTestProviderLocation(LocationManager.GPS_PROVIDER, mockLocation)
-            
-        } catch (e: SecurityException) {
-            // Handle security exception
-            e.printStackTrace()
+
+            if (mockProviderRegistered) {
+                locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, true)
+                locationManager.setTestProviderLocation(LocationManager.GPS_PROVIDER, mockLocation)
+            }
         } catch (e: Exception) {
-            // Handle other exceptions
             e.printStackTrace()
         }
-    }
-    
-    private fun calculateDistance(point1: LocationPoint, point2: LocationPoint): Double {
-        val earthRadius = 6371000.0 // Earth's radius in meters
-        
-        val lat1 = Math.toRadians(point1.latitude)
-        val lon1 = Math.toRadians(point1.longitude)
-        val lat2 = Math.toRadians(point2.latitude)
-        val lon2 = Math.toRadians(point2.longitude)
-        
-        val dLat = lat2 - lat1
-        val dLon = lon2 - lon1
-        
-        val a = sin(dLat / 2) * sin(dLat / 2) +
-                cos(lat1) * cos(lat2) *
-                sin(dLon / 2) * sin(dLon / 2)
-        
-        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
-        
-        return earthRadius * c
     }
     
     private fun completeSimulation() {
         _isSimulating.value = false
         _progress.value = 100f
+        SimulationState.setSimulating(false)
+        SimulationState.setPaused(false)
+        SimulationState.setProgress(100f)
         
         val duration = System.currentTimeMillis() - startTime
         
-        // Save route completion to database
         currentRoute?.let { route ->
             serviceScope.launch {
                 val app = application as GPSimulatorApp
@@ -208,36 +197,44 @@ class LocationSimulationService : Service() {
         }
         
         updateNotification("Simulation completed")
+        cleanupMockProvider()
         
-        // Remove test provider
-        try {
-            locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, false)
-            locationManager.removeTestProvider(LocationManager.GPS_PROVIDER)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        
-        // Stop service after a delay
         serviceScope.launch {
-            delay(5000) // Show completion for 5 seconds
+            delay(5000)
             stopSelf()
         }
     }
     
     private fun stopSimulation() {
         _isSimulating.value = false
+        _isPaused.value = false
+        SimulationState.reset()
         simulationJob?.cancel()
         
-        // Remove test provider
-        try {
-            locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, false)
-            locationManager.removeTestProvider(LocationManager.GPS_PROVIDER)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        cleanupMockProvider()
         
         updateNotification("Simulation stopped")
         stopSelf()
+    }
+
+    private fun cleanupMockProvider() {
+        try {
+            fusedLocationClient.setMockMode(false)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            if (mockProviderRegistered) {
+                locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, false)
+                locationManager.removeTestProvider(LocationManager.GPS_PROVIDER)
+                mockProviderRegistered = false
+            }
+        } catch (e: IllegalArgumentException) {
+            mockProviderRegistered = false
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
     
     private fun createNotification(): Notification {
@@ -270,14 +267,7 @@ class LocationSimulationService : Service() {
         super.onDestroy()
         simulationJob?.cancel()
         serviceScope.cancel()
-        
-        // Clean up test provider
-        try {
-            locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, false)
-            locationManager.removeTestProvider(LocationManager.GPS_PROVIDER)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        cleanupMockProvider()
     }
     
     companion object {

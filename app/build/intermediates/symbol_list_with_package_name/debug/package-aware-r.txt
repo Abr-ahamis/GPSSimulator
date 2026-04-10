@@ -3368,6 +3368,7 @@ id edit_query
 id edit_text_id
 id elastic
 id embed
+id emergencyStopButton
 id emptyStateTextView
 id end
 id endToStart
@@ -3476,10 +3477,6 @@ id month_navigation_next
 id month_navigation_previous
 id month_title
 id motion_base
-id movementCycling
-id movementRunning
-id movementTypeGroup
-id movementWalking
 id mtrl_anchor_parent
 id mtrl_calendar_day_selector_frame
 id mtrl_calendar_days_of_week
@@ -3548,6 +3545,8 @@ id open_search_view_toolbar_container
 id outline
 id outward
 id overshoot
+id paceSlider
+id paceText
 id packed
 id parallax
 id parent
@@ -3557,6 +3556,7 @@ id parent_matrix
 id password_toggle
 id path
 id pathRelative
+id pauseResumeButton
 id peekHeight
 id percent
 id pin
@@ -3577,11 +3577,12 @@ id rightToLeft
 id right_icon
 id right_side
 id rounded
-id routeCircular
 id routeDateTextView
 id routeDistanceTextView
+id routeDraw
 id routeDurationTextView
 id routeNameTextView
+id routePins
 id routeRandom
 id routeStatusTextView
 id routeTypeGroup

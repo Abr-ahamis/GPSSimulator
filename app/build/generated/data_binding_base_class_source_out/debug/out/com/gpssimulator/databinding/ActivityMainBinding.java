@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import com.google.android.material.slider.Slider;
 import com.gpssimulator.R;
 import java.lang.Deprecated;
 import java.lang.Object;
@@ -40,22 +41,22 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   public final RadioGroup distanceGroup;
 
   @NonNull
+  public final Button emergencyStopButton;
+
+  @NonNull
   public final ImageButton historyButton;
 
   @NonNull
   public final MapView mapView;
 
   @NonNull
-  public final RadioButton movementCycling;
+  public final Slider paceSlider;
 
   @NonNull
-  public final RadioButton movementRunning;
+  public final TextView paceText;
 
   @NonNull
-  public final RadioGroup movementTypeGroup;
-
-  @NonNull
-  public final RadioButton movementWalking;
+  public final Button pauseResumeButton;
 
   @NonNull
   public final ProgressBar progressBar;
@@ -64,7 +65,10 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   public final TextView progressText;
 
   @NonNull
-  public final RadioButton routeCircular;
+  public final RadioButton routeDraw;
+
+  @NonNull
+  public final RadioButton routePins;
 
   @NonNull
   public final RadioButton routeRandom;
@@ -81,11 +85,10 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   protected ActivityMainBinding(Object _bindingComponent, View _root, int _localFieldCount,
       CardView controlPanel, ImageButton currentLocationButton, RadioButton distance10km,
       RadioButton distance5km, RadioButton distanceCustom, RadioGroup distanceGroup,
-      ImageButton historyButton, MapView mapView, RadioButton movementCycling,
-      RadioButton movementRunning, RadioGroup movementTypeGroup, RadioButton movementWalking,
-      ProgressBar progressBar, TextView progressText, RadioButton routeCircular,
-      RadioButton routeRandom, RadioGroup routeTypeGroup, ImageButton settingsButton,
-      Button startStopButton) {
+      Button emergencyStopButton, ImageButton historyButton, MapView mapView, Slider paceSlider,
+      TextView paceText, Button pauseResumeButton, ProgressBar progressBar, TextView progressText,
+      RadioButton routeDraw, RadioButton routePins, RadioButton routeRandom,
+      RadioGroup routeTypeGroup, ImageButton settingsButton, Button startStopButton) {
     super(_bindingComponent, _root, _localFieldCount);
     this.controlPanel = controlPanel;
     this.currentLocationButton = currentLocationButton;
@@ -93,15 +96,16 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
     this.distance5km = distance5km;
     this.distanceCustom = distanceCustom;
     this.distanceGroup = distanceGroup;
+    this.emergencyStopButton = emergencyStopButton;
     this.historyButton = historyButton;
     this.mapView = mapView;
-    this.movementCycling = movementCycling;
-    this.movementRunning = movementRunning;
-    this.movementTypeGroup = movementTypeGroup;
-    this.movementWalking = movementWalking;
+    this.paceSlider = paceSlider;
+    this.paceText = paceText;
+    this.pauseResumeButton = pauseResumeButton;
     this.progressBar = progressBar;
     this.progressText = progressText;
-    this.routeCircular = routeCircular;
+    this.routeDraw = routeDraw;
+    this.routePins = routePins;
     this.routeRandom = routeRandom;
     this.routeTypeGroup = routeTypeGroup;
     this.settingsButton = settingsButton;

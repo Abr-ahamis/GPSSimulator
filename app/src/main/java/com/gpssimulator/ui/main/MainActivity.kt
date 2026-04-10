@@ -17,9 +17,9 @@ import androidx.core.content.ContextCompat
 import com.gpssimulator.GPSimulatorApp
 import com.gpssimulator.R
 import com.gpssimulator.data.model.LocationPoint
-import com.gpssimulator.data.model.MovementType
 import com.gpssimulator.databinding.ActivityMainBinding
 import com.gpssimulator.service.LocationSimulationService
+import com.gpssimulator.service.SimulationState
 import com.gpssimulator.ui.history.HistoryActivity
 import com.gpssimulator.ui.settings.SettingsActivity
 import com.gpssimulator.utils.LocationUtils
@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
@@ -81,8 +82,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         
         // Configure OSMDroid
-        Configuration.getInstance().load(applicationContext, 
-            androidx.preference.PreferenceManager.getDefaultSharedPreferences(applicationContext))
+        Configuration.getInstance().load(
+            applicationContext,
+            getSharedPreferences("osmdroid", Context.MODE_PRIVATE)
+        )
         Configuration.getInstance().userAgentValue = packageName
         
         locationUtils = LocationUtils(this)
@@ -103,8 +106,76 @@ class MainActivity : AppCompatActivity() {
         mapController = mapView.controller
         mapController.setZoom(15.0)
         
+        // Setup MapEventsOverlay
+        val mapEventsReceiver = object : org.osmdroid.events.MapEventsReceiver {
+            override fun singleTapConfirmedHelper(p: GeoPoint?): Boolean {
+                p?.let { handleMapTap(it) }
+                return true
+            }
+
+            override fun longPressHelper(p: GeoPoint?): Boolean {
+                return false
+            }
+        }
+        val mapEventsOverlay = org.osmdroid.views.overlay.MapEventsOverlay(mapEventsReceiver)
+        mapView.overlays.add(0, mapEventsOverlay)
+        
         // Get current location and center map
         getCurrentLocationAndCenter()
+    }
+
+    private var customPointsMarkers: MutableList<Marker> = mutableListOf()
+    private var customRoutePolyline: Polyline? = null
+
+    private fun handleMapTap(geoPoint: GeoPoint) {
+        val routeType = viewModel.routeType.value
+        if (routeType == RouteType.PINS || routeType == RouteType.DRAW) {
+            val locationPoint = LocationPoint(geoPoint.latitude, geoPoint.longitude)
+            viewModel.addCustomPoint(locationPoint)
+            
+            val marker = Marker(mapView).apply {
+                position = geoPoint
+                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                title = "Point ${viewModel.customPoints.value.size}"
+                icon = ContextCompat.getDrawable(this@MainActivity, android.R.drawable.ic_menu_myplaces)
+            }
+            mapView.overlays.add(marker)
+            customPointsMarkers.add(marker)
+            
+            drawCustomPointsLine()
+            mapView.invalidate()
+        }
+    }
+    
+    private fun drawCustomPointsLine() {
+        val points = viewModel.customPoints.value
+        
+        customRoutePolyline?.let { mapView.overlays.remove(it) }
+        
+        val geoPoints = mutableListOf<GeoPoint>()
+        viewModel.currentLocation.value?.let { 
+           geoPoints.add(GeoPoint(it.latitude, it.longitude))
+        }
+        geoPoints.addAll(points.map { GeoPoint(it.latitude, it.longitude) })
+        
+        if (geoPoints.size < 2) return
+        
+        customRoutePolyline = Polyline().apply {
+            setPoints(geoPoints)
+            outlinePaint.color = ContextCompat.getColor(this@MainActivity, android.R.color.holo_blue_dark)
+            outlinePaint.strokeWidth = 6f
+        }
+        
+        mapView.overlays.add(customRoutePolyline)
+    }
+
+    private fun clearCustomMapPoints() {
+        viewModel.clearCustomPoints()
+        customPointsMarkers.forEach { mapView.overlays.remove(it) }
+        customPointsMarkers.clear()
+        customRoutePolyline?.let { mapView.overlays.remove(it) }
+        customRoutePolyline = null
+        mapView.invalidate()
     }
     
     private fun setupUI() {
@@ -121,25 +192,25 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             
-            // Movement type selector
-            movementTypeGroup.setOnCheckedChangeListener { _, checkedId ->
-                val movementType = when (checkedId) {
-                    R.id.movementWalking -> MovementType.WALKING
-                    R.id.movementRunning -> MovementType.RUNNING
-                    R.id.movementCycling -> MovementType.CYCLING
-                    else -> MovementType.WALKING
-                }
-                viewModel.setMovementType(movementType)
+            // Pace selector
+            paceSlider.addOnChangeListener { _, value, _ ->
+                val paceSeconds = value.toInt()
+                viewModel.setPaceConfig(paceSeconds)
+                val m = paceSeconds / 60
+                val s = paceSeconds % 60
+                paceText.text = String.format("%02d:%02d", m, s)
             }
             
             // Route type selector
             routeTypeGroup.setOnCheckedChangeListener { _, checkedId ->
-                val isCircular = when (checkedId) {
-                    R.id.routeCircular -> true
-                    R.id.routeRandom -> false
-                    else -> true
+                val routeType = when (checkedId) {
+                    R.id.routeRandom -> RouteType.RANDOM
+                    R.id.routePins -> RouteType.PINS
+                    R.id.routeDraw -> RouteType.DRAW
+                    else -> RouteType.RANDOM
                 }
-                viewModel.setCircularRoute(isCircular)
+                viewModel.setRouteType(routeType)
+                clearCustomMapPoints() // Clear custom points when switching modes
             }
             
             // Start/Stop button
@@ -149,6 +220,18 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     startSimulation()
                 }
+            }
+            
+            pauseResumeButton.setOnClickListener {
+                if (viewModel.isPaused.value) {
+                    resumeSimulation()
+                } else {
+                    pauseSimulation()
+                }
+            }
+            
+            emergencyStopButton.setOnClickListener {
+                stopSimulation()
             }
             
             // Navigation buttons
@@ -169,19 +252,33 @@ class MainActivity : AppCompatActivity() {
     
     private fun observeViewModel() {
         lifecycleScope.launch {
-            viewModel.isSimulating.collectLatest { isSimulating ->
-                updateUIForSimulationState(isSimulating)
+            SimulationState.isSimulating.collectLatest { isSimulating ->
+                updateUIForSimulationState(isSimulating, SimulationState.isPaused.value)
+            }
+        }
+        
+        lifecycleScope.launch {
+            SimulationState.isPaused.collectLatest { isPaused ->
+                updateUIForSimulationState(SimulationState.isSimulating.value, isPaused)
             }
         }
         
         lifecycleScope.launch {
             viewModel.currentLocation.collectLatest { location ->
+                if (!SimulationState.isSimulating.value) {
+                    location?.let { updateMapLocation(it) }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            SimulationState.currentLocation.collectLatest { location ->
                 location?.let { updateMapLocation(it) }
             }
         }
         
         lifecycleScope.launch {
-            viewModel.progress.collectLatest { progress ->
+            SimulationState.progress.collectLatest { progress ->
                 binding.progressBar.progress = progress.toInt()
                 binding.progressText.text = "${progress.toInt()}%"
             }
@@ -225,9 +322,9 @@ class MainActivity : AppCompatActivity() {
         mapView.invalidate()
     }
     
-    private fun updateUIForSimulationState(isSimulating: Boolean) {
+    private fun updateUIForSimulationState(isSimulating: Boolean, isPaused: Boolean) {
         binding.apply {
-            startStopButton.text = if (isSimulating) "Stop Simulation" else "Start Simulation"
+            startStopButton.text = if (isSimulating) "Stop" else "Start"
             startStopButton.setBackgroundColor(
                 ContextCompat.getColor(
                     this@MainActivity,
@@ -235,12 +332,15 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             
+            pauseResumeButton.isEnabled = isSimulating
+            pauseResumeButton.text = if (isPaused) "Resume" else "Pause"
+            
             // Disable controls during simulation
             distanceGroup.isEnabled = !isSimulating
-            movementTypeGroup.isEnabled = !isSimulating
+            paceSlider.isEnabled = !isSimulating
             routeTypeGroup.isEnabled = !isSimulating
             
-            progressBar.isIndeterminate = isSimulating
+            progressBar.isIndeterminate = false
             if (!isSimulating) {
                 progressBar.progress = 0
                 progressText.text = "0%"
@@ -257,14 +357,6 @@ class MainActivity : AppCompatActivity() {
         if (!locationUtils.isLocationEnabled()) {
             Toast.makeText(this, "Please enable GPS", Toast.LENGTH_SHORT).show()
             return
-        }
-        
-        // Check for mock location permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.Secure.getString(contentResolver, Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
-                Toast.makeText(this, "Please enable mock location in developer options", Toast.LENGTH_LONG).show()
-                return
-            }
         }
         
         val currentLocation = viewModel.currentLocation.value
@@ -301,7 +393,24 @@ class MainActivity : AppCompatActivity() {
         // Clear route from map
         routePolyline?.let { mapView.overlays.remove(it) }
         routePolyline = null
+        clearCustomMapPoints()
         mapView.invalidate()
+    }
+    
+    private fun pauseSimulation() {
+        val intent = Intent(this, LocationSimulationService::class.java).apply {
+            action = "pause_simulation"
+        }
+        startService(intent)
+        viewModel.pauseSimulation()
+    }
+    
+    private fun resumeSimulation() {
+        val intent = Intent(this, LocationSimulationService::class.java).apply {
+            action = "resume_simulation"
+        }
+        startService(intent)
+        viewModel.resumeSimulation()
     }
     
     private fun drawRouteOnMap(route: com.gpssimulator.data.model.Route) {
@@ -319,7 +428,7 @@ class MainActivity : AppCompatActivity() {
         
         // Fit map to show entire route
         if (points.isNotEmpty()) {
-            val boundingBox = org.osmdroid.boundingbox.BoundingBox.fromGeoPoints(points)
+            val boundingBox = BoundingBox.fromGeoPoints(points)
             mapView.zoomToBoundingBox(boundingBox, false, 100)
         }
         

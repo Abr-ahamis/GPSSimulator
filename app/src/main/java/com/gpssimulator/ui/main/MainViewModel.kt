@@ -2,15 +2,17 @@ package com.gpssimulator.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
 import com.gpssimulator.GPSimulatorApp
 import com.gpssimulator.data.model.LocationPoint
-import com.gpssimulator.data.model.MovementType
+import com.gpssimulator.data.model.PaceConfig
 import com.gpssimulator.data.model.Route
 import com.gpssimulator.service.RouteGenerator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
+
+enum class RouteType {
+    RANDOM, PINS, DRAW
+}
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     
@@ -19,6 +21,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     private val _isSimulating = MutableStateFlow(false)
     val isSimulating: StateFlow<Boolean> = _isSimulating
+
+    private val _isPaused = MutableStateFlow(false)
+    val isPaused: StateFlow<Boolean> = _isPaused
     
     private val _currentLocation = MutableStateFlow<LocationPoint?>(null)
     val currentLocation: StateFlow<LocationPoint?> = _currentLocation
@@ -29,12 +34,16 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _distance = MutableStateFlow(5000.0) // Default 5km
     val distance: StateFlow<Double> = _distance
     
-    private val _movementType = MutableStateFlow(MovementType.WALKING)
-    val movementType: StateFlow<MovementType> = _movementType
+    private val _paceConfig = MutableStateFlow(PaceConfig(330)) // Default 05:30
+    val paceConfig: StateFlow<PaceConfig> = _paceConfig
     
-    private val _isCircularRoute = MutableStateFlow(true)
-    val isCircularRoute: StateFlow<Boolean> = _isCircularRoute
-    
+    private val _routeType = MutableStateFlow(RouteType.RANDOM)
+    val routeType: StateFlow<RouteType> = _routeType
+
+    // For Pin and Draw modes
+    private val _customPoints = MutableStateFlow<List<LocationPoint>>(emptyList())
+    val customPoints: StateFlow<List<LocationPoint>> = _customPoints
+
     fun setCurrentLocation(location: LocationPoint) {
         _currentLocation.value = location
     }
@@ -43,48 +52,70 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _distance.value = distance
     }
     
-    fun setMovementType(movementType: MovementType) {
-        _movementType.value = movementType
+    fun setPaceConfig(paceSeconds: Int) {
+        _paceConfig.value = PaceConfig(paceSeconds)
     }
     
-    fun setCircularRoute(isCircular: Boolean) {
-        _isCircularRoute.value = isCircular
+    fun setRouteType(type: RouteType) {
+        _routeType.value = type
+    }
+
+    fun addCustomPoint(point: LocationPoint) {
+        _customPoints.value = _customPoints.value + point
+    }
+
+    fun clearCustomPoints() {
+        _customPoints.value = emptyList()
     }
     
     fun startSimulation() {
         _isSimulating.value = true
+        _isPaused.value = false
         _progress.value = 0f
     }
     
     fun stopSimulation() {
         _isSimulating.value = false
+        _isPaused.value = false
         _progress.value = 0f
+    }
+
+    fun pauseSimulation() {
+        _isPaused.value = true
+    }
+
+    fun resumeSimulation() {
+        _isPaused.value = false
     }
     
     suspend fun generateRoute(startPoint: LocationPoint): Route? {
         return try {
-            val route = if (_isCircularRoute.value) {
-                routeGenerator.generateCircularRoute(
-                    centerPoint = startPoint,
-                    totalDistance = _distance.value,
-                    movementType = _movementType.value
-                )
-            } else {
-                routeGenerator.generateRandomRoute(
-                    startPoint = startPoint,
-                    totalDistance = _distance.value,
-                    movementType = _movementType.value
-                )
-            }
+            val route = when (_routeType.value) {
+                RouteType.RANDOM -> {
+                    routeGenerator.generateRandomRoute(
+                        startPoint = startPoint,
+                        totalDistance = _distance.value,
+                        paceConfig = _paceConfig.value
+                    )
+                }
+                RouteType.PINS -> {
+                    if (_customPoints.value.isEmpty()) return null
+                    routeGenerator.generateCustomRouteFromPins(
+                        pins = listOf(startPoint) + _customPoints.value,
+                        paceConfig = _paceConfig.value
+                    )
+                }
+                RouteType.DRAW -> {
+                    if (_customPoints.value.isEmpty()) return null
+                    routeGenerator.generateCustomDrawnRoute(
+                        points = listOf(startPoint) + _customPoints.value,
+                        paceConfig = _paceConfig.value
+                    )
+                }
+            } ?: return null
             
             // Save route to database
-            val routeId = app.routeRepository.insertRoute(
-                name = route.name,
-                startPoint = startPoint,
-                totalDistance = route.totalDistance,
-                estimatedDuration = route.estimatedDuration,
-                movementType = route.movementType
-            )
+            val routeId = app.routeRepository.insertRoute(route)
             
             route.copy(id = routeId)
         } catch (e: Exception) {

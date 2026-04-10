@@ -34,9 +34,9 @@ public final class AppDatabase_Impl extends AppDatabase {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS `routes` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `startLatitude` REAL NOT NULL, `startLongitude` REAL NOT NULL, `totalDistance` REAL NOT NULL, `estimatedDuration` INTEGER NOT NULL, `movementType` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, `isCompleted` INTEGER NOT NULL, `actualDuration` INTEGER NOT NULL, `completedAt` INTEGER)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `routes` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `points` TEXT NOT NULL, `totalDistance` REAL NOT NULL, `estimatedDuration` INTEGER NOT NULL, `basePaceSeconds` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `isCompleted` INTEGER NOT NULL, `actualDuration` INTEGER NOT NULL, `completedAt` INTEGER)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6f87c3fe38d2e6f6c62950a8051aa5d8')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '708d8b6a556da1038dabfe055549fb7d')");
       }
 
       @Override
@@ -85,14 +85,13 @@ public final class AppDatabase_Impl extends AppDatabase {
       @NonNull
       public RoomOpenHelper.ValidationResult onValidateSchema(
           @NonNull final SupportSQLiteDatabase db) {
-        final HashMap<String, TableInfo.Column> _columnsRoutes = new HashMap<String, TableInfo.Column>(11);
+        final HashMap<String, TableInfo.Column> _columnsRoutes = new HashMap<String, TableInfo.Column>(10);
         _columnsRoutes.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsRoutes.put("name", new TableInfo.Column("name", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsRoutes.put("startLatitude", new TableInfo.Column("startLatitude", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsRoutes.put("startLongitude", new TableInfo.Column("startLongitude", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsRoutes.put("points", new TableInfo.Column("points", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsRoutes.put("totalDistance", new TableInfo.Column("totalDistance", "REAL", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsRoutes.put("estimatedDuration", new TableInfo.Column("estimatedDuration", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
-        _columnsRoutes.put("movementType", new TableInfo.Column("movementType", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsRoutes.put("basePaceSeconds", new TableInfo.Column("basePaceSeconds", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsRoutes.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsRoutes.put("isCompleted", new TableInfo.Column("isCompleted", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
         _columnsRoutes.put("actualDuration", new TableInfo.Column("actualDuration", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
@@ -108,7 +107,7 @@ public final class AppDatabase_Impl extends AppDatabase {
         }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "6f87c3fe38d2e6f6c62950a8051aa5d8", "56d1352c8cc0dfdadeea81845232e95f");
+    }, "708d8b6a556da1038dabfe055549fb7d", "747cd9627ee24d2ad4f9bcb9cccf7ca1");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;

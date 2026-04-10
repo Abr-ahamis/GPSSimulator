@@ -1,172 +1,80 @@
 package com.gpssimulator.service
 
 import com.gpssimulator.data.model.LocationPoint
-import com.gpssimulator.data.model.MovementType
+import com.gpssimulator.data.model.PaceConfig
 import com.gpssimulator.data.model.Route
-import com.gpssimulator.data.model.RouteSegment
+import com.gpssimulator.data.network.OSRMService
+import com.gpssimulator.utils.PolylineDecoder
 import kotlin.math.*
 import kotlin.random.Random
 
 class RouteGenerator {
     
-    fun generateCircularRoute(
-        centerPoint: LocationPoint,
-        totalDistance: Double, // in meters
-        movementType: MovementType,
-        numSegments: Int = 8
-    ): Route {
-        val radius = totalDistance / (2 * PI) // Calculate radius for circular route
-        val segments = mutableListOf<RouteSegment>()
-        var currentPoint = centerPoint
-        var accumulatedDistance = 0.0
-        
-        for (i in 0 until numSegments) {
-            val angleStep = (2 * PI) / numSegments
-            val currentAngle = i * angleStep
-            
-            // Calculate next point on circle
-            val nextAngle = (i + 1) * angleStep
-            val nextPoint = calculatePointOnCircle(centerPoint, radius, nextAngle)
-            
-            // Calculate distance between current and next point
-            val segmentDistance = calculateDistance(currentPoint, nextPoint)
-            accumulatedDistance += segmentDistance
-            
-            // Calculate segment duration with variation
-            val baseSpeed = movementType.baseSpeed
-            val speedVariation = movementType.speedVariation
-            val randomSpeed = baseSpeed + (Random.nextDouble() - 0.5) * 2 * speedVariation
-            val segmentDuration = (segmentDistance / randomSpeed * 1000).toLong()
-            
-            val segment = RouteSegment(
-                startPoint = currentPoint,
-                endPoint = nextPoint,
-                distance = segmentDistance,
-                duration = segmentDuration,
-                movementType = movementType
-            )
-            
-            segments.add(segment)
-            currentPoint = nextPoint
-        }
-        
-        // Add segment to return to center
-        val returnDistance = calculateDistance(currentPoint, centerPoint)
-        val returnDuration = (returnDistance / movementType.baseSpeed * 1000).toLong()
-        val returnSegment = RouteSegment(
-            startPoint = currentPoint,
-            endPoint = centerPoint,
-            distance = returnDistance,
-            duration = returnDuration,
-            movementType = movementType
-        )
-        segments.add(returnSegment)
-        
-        val totalDuration = segments.sumOf { it.duration }
-        
-        return Route(
-            name = "Circular Route - ${totalDistance.toInt()}m",
-            startPoint = centerPoint,
-            segments = segments,
-            totalDistance = totalDistance,
-            estimatedDuration = totalDuration,
-            movementType = movementType
-        )
-    }
-    
-    fun generateRandomRoute(
+    private val osrmService = OSRMService.create()
+
+    suspend fun generateRandomRoute(
         startPoint: LocationPoint,
         totalDistance: Double,
-        movementType: MovementType,
-        maxSegmentLength: Double = 200.0
+        paceConfig: PaceConfig
+    ): Route? {
+        // Pick a random destination roughly totalDistance/2 away to make a return trip
+        val targetDistance = totalDistance / 2.0
+        val randomBearing = Random.nextDouble() * 360.0
+        val destinationPoint = calculateDestinationPoint(startPoint, targetDistance, randomBearing)
+
+        // Query OSRM for route from start -> destination -> start
+        val coordinates = "${startPoint.longitude},${startPoint.latitude};${destinationPoint.longitude},${destinationPoint.latitude};${startPoint.longitude},${startPoint.latitude}"
+        
+        return fetchRouteFromOSRM(coordinates, "Random Route - ${totalDistance.toInt()}m", paceConfig)
+    }
+
+    suspend fun generateCustomRouteFromPins(
+        pins: List<LocationPoint>,
+        paceConfig: PaceConfig
+    ): Route? {
+        if (pins.size < 2) return null
+        
+        val coordinates = pins.joinToString(";") { "${it.longitude},${it.latitude}" }
+        return fetchRouteFromOSRM(coordinates, "Custom Route", paceConfig)
+    }
+
+    suspend fun generateCustomDrawnRoute(
+        points: List<LocationPoint>,
+        paceConfig: PaceConfig
     ): Route {
-        val segments = mutableListOf<RouteSegment>()
-        var currentPoint = startPoint
-        var remainingDistance = totalDistance
-        var accumulatedDistance = 0.0
-        
-        while (remainingDistance > 0) {
-            // Generate random direction and distance for this segment
-            val segmentDistance = minOf(
-                remainingDistance,
-                maxSegmentLength * (0.5 + Random.nextDouble() * 0.5)
-            )
-            
-            val bearing = Random.nextDouble() * 360.0
-            val nextPoint = calculateDestinationPoint(currentPoint, segmentDistance, bearing)
-            
-            // Calculate segment duration with variation
-            val baseSpeed = movementType.baseSpeed
-            val speedVariation = movementType.speedVariation
-            val randomSpeed = baseSpeed + (Random.nextDouble() - 0.5) * 2 * speedVariation
-            val segmentDuration = (segmentDistance / randomSpeed * 1000).toLong()
-            
-            val segment = RouteSegment(
-                startPoint = currentPoint,
-                endPoint = nextPoint,
-                distance = segmentDistance,
-                duration = segmentDuration,
-                movementType = movementType
-            )
-            
-            segments.add(segment)
-            currentPoint = nextPoint
-            remainingDistance -= segmentDistance
-            accumulatedDistance += segmentDistance
-        }
-        
-        // Add segment to return to start
-        val returnDistance = calculateDistance(currentPoint, startPoint)
-        val returnDuration = (returnDistance / movementType.baseSpeed * 1000).toLong()
-        val returnSegment = RouteSegment(
-            startPoint = currentPoint,
-            endPoint = startPoint,
-            distance = returnDistance,
-            duration = returnDuration,
-            movementType = movementType
-        )
-        segments.add(returnSegment)
-        
-        val totalDuration = segments.sumOf { it.duration }
+        val totalDistance = calculateTotalDistance(points)
+        val estimatedDuration = (totalDistance / (1000.0 / paceConfig.baseSeconds) * 1000).toLong()
         
         return Route(
-            name = "Random Route - ${totalDistance.toInt()}m",
-            startPoint = startPoint,
-            segments = segments,
+            name = "Drawn Route",
+            points = points,
             totalDistance = totalDistance,
-            estimatedDuration = totalDuration,
-            movementType = movementType
+            estimatedDuration = estimatedDuration,
+            paceConfig = paceConfig
         )
     }
-    
-    private fun calculatePointOnCircle(
-        center: LocationPoint,
-        radius: Double,
-        angle: Double
-    ): LocationPoint {
-        val earthRadius = 6371000.0 // Earth's radius in meters
-        
-        val lat1 = Math.toRadians(center.latitude)
-        val lon1 = Math.toRadians(center.longitude)
-        
-        val angularDistance = radius / earthRadius
-        
-        val lat2 = Math.asin(
-            sin(lat1) * cos(angularDistance) +
-                    cos(lat1) * sin(angularDistance) * cos(angle)
-        )
-        
-        val lon2 = lon1 + atan2(
-            sin(angle) * sin(angularDistance) * cos(lat1),
-            cos(angularDistance) - sin(lat1) * sin(lat2)
-        )
-        
-        return LocationPoint(
-            latitude = Math.toDegrees(lat2),
-            longitude = Math.toDegrees(lon2)
-        )
+
+    private suspend fun fetchRouteFromOSRM(coordinates: String, name: String, paceConfig: PaceConfig): Route? {
+        return try {
+            val response = osrmService.getRoute(coordinates)
+            if (response.code == "Ok" && response.routes.isNotEmpty()) {
+                val osrmRoute = response.routes.first()
+                val decodedPoints = PolylineDecoder.decode(osrmRoute.geometry)
+                
+                Route(
+                    name = name,
+                    points = decodedPoints,
+                    totalDistance = osrmRoute.distance,
+                    estimatedDuration = ((osrmRoute.distance / 1000.0) * paceConfig.baseSeconds * 1000).toLong(),
+                    paceConfig = paceConfig
+                )
+            } else null
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
-    
+
     private fun calculateDestinationPoint(
         start: LocationPoint,
         distance: Double,
@@ -195,24 +103,27 @@ class RouteGenerator {
             longitude = Math.toDegrees(lon2)
         )
     }
-    
+
+    private fun calculateTotalDistance(points: List<LocationPoint>): Double {
+        if (points.size < 2) return 0.0
+        var total = 0.0
+        for (i in 0 until points.size - 1) {
+            total += calculateDistance(points[i], points[i + 1])
+        }
+        return total
+    }
+
     private fun calculateDistance(point1: LocationPoint, point2: LocationPoint): Double {
-        val earthRadius = 6371000.0 // Earth's radius in meters
-        
+        val earthRadius = 6371000.0
         val lat1 = Math.toRadians(point1.latitude)
         val lon1 = Math.toRadians(point1.longitude)
         val lat2 = Math.toRadians(point2.latitude)
         val lon2 = Math.toRadians(point2.longitude)
-        
         val dLat = lat2 - lat1
         val dLon = lon2 - lon1
-        
         val a = sin(dLat / 2) * sin(dLat / 2) +
-                cos(lat1) * cos(lat2) *
-                sin(dLon / 2) * sin(dLon / 2)
-        
+                cos(lat1) * cos(lat2) * sin(dLon / 2) * sin(dLon / 2)
         val c = 2 * atan2(sqrt(a), sqrt(1 - a))
-        
         return earthRadius * c
     }
 }
