@@ -3,13 +3,10 @@
                                                        
                                                    
 
-    
-                                                 
-           
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/obsidian"
         tools:context=".ui.main.MainActivity" android:tag="layout/activity_main_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
 
         <org.osmdroid.views.MapView
@@ -21,13 +18,117 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <LinearLayout
+            android:id="@+id/topActions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/top_actions_bg"
+            android:elevation="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/currentLocationButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Current Location"
+                android:src="@android:drawable/ic_menu_mylocation"
+                android:tint="@color/soft_text" />
+
+            <ImageButton
+                android:id="@+id/historyButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="History"
+                android:src="@android:drawable/ic_menu_recent_history"
+                android:tint="@color/soft_text" />
+
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Settings"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:tint="@color/soft_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mapModePanel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/top_actions_bg"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="14dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/mapModeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pin Route"
+                android:textColor="@color/soft_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/mapGuideText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Tap the map to place route points."
+                android:textColor="@color/muted_text"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/clearMapPointsButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/signal_red"
+                    android:text="Clear"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/mapModeDoneButton"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/electric_violet"
+                    android:text="Review Setup"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/controlPanel"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/panel_surface"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="12dp"
+            app:contentPadding="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -35,115 +136,342 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/control_panel_bg"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="20dp">
 
-                <!-- Distance Selection -->
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/panelTitle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Distance"
+                    android:text="Runner Control"
+                    android:textColor="@color/soft_text"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
-                <RadioGroup
-                    android:id="@+id/distanceGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/distance5km"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="5 km"
-                        android:checked="true" />
-
-                    <RadioButton
-                        android:id="@+id/distance10km"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10 km" />
-
-                    <RadioButton
-                        android:id="@+id/distanceCustom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Custom" />
-                </RadioGroup>
-
-                <!-- Pace Selection -->
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/panelSubtitle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Pace (min/km)"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="4dp"
+                    android:text="Build the run, then launch it."
+                    android:textColor="@color/muted_text"
+                    android:textSize="13sp" />
 
                 <LinearLayout
+                    android:id="@+id/distanceSection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-                    
-                    <com.google.android.material.slider.Slider
-                        android:id="@+id/paceSlider"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:valueFrom="180"
-                        android:valueTo="900"
-                        android:stepSize="10"
-                        android:value="330" />
-                        
+                    android:layout_marginTop="18dp"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:id="@+id/paceText"
-                        android:layout_width="60dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="05:32"
-                        android:textStyle="bold"
-                        android:gravity="end" />
+                        android:text="1. Choose Distance"
+                        android:textColor="@color/soft_text"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/distanceGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/distance5km"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="5 km"
+                            android:textColor="@color/soft_text"
+                            android:buttonTint="@color/electric_violet" />
+
+                        <RadioButton
+                            android:id="@+id/distance10km"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="10 km"
+                            android:textColor="@color/soft_text"
+                            android:buttonTint="@color/electric_violet" />
+
+                        <RadioButton
+                            android:id="@+id/distanceCustom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Custom"
+                            android:textColor="@color/soft_text"
+                            android:buttonTint="@color/electric_violet" />
+                    </RadioGroup>
+
+                    <Button
+                        android:id="@+id/distanceNextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="@color/electric_violet"
+                        android:text="Next"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Route Type Selection -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Route Type"
-                    android:textStyle="bold" />
-
-                <RadioGroup
-                    android:id="@+id/routeTypeGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/routeRandom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Random"
-                        android:checked="true" />
-
-                    <RadioButton
-                        android:id="@+id/routePins"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pin Map" />
-                        
-                    <RadioButton
-                        android:id="@+id/routeDraw"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Draw Map" />
-                </RadioGroup>
-
-                <!-- Progress Bar -->
                 <LinearLayout
+                    android:id="@+id/paceSection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="16dp"
+                    android:alpha="0"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2. Set Human Pace"
+                        android:textColor="@color/soft_text"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.slider.Slider
+                            android:id="@+id/paceSlider"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:value="330"
+                            android:valueFrom="180"
+                            android:valueTo="900"
+                            android:stepSize="10"
+                            app:haloColor="@color/electric_violet"
+                            app:thumbColor="@color/electric_violet"
+                            app:trackColorActive="@color/electric_violet"
+                            app:trackColorInactive="@color/muted_text" />
+
+                        <TextView
+                            android:id="@+id/paceText"
+                            android:layout_width="88dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="05:30"
+                            android:textColor="@color/electric_violet"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/paceHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Each segment varies uniformly from -30s to +30s."
+                        android:textColor="@color/muted_text"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/paceNextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="@color/electric_violet"
+                        android:text="Next"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/routeSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:alpha="0"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3. Choose Route Type"
+                        android:textColor="@color/soft_text"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/routeTypeGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/routeRandom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Random"
+                            android:textColor="@color/soft_text"
+                            android:buttonTint="@color/electric_violet" />
+
+                        <RadioButton
+                            android:id="@+id/routePins"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pin Map"
+                            android:textColor="@color/soft_text"
+                            android:buttonTint="@color/electric_violet" />
+
+                        <RadioButton
+                            android:id="@+id/routeDraw"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Draw Map"
+                            android:textColor="@color/soft_text"
+                            android:buttonTint="@color/electric_violet" />
+                    </RadioGroup>
+
+                    <Button
+                        android:id="@+id/routeNextButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="@color/electric_violet"
+                        android:text="Review Setup"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/summaryPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:alpha="0"
+                    android:background="@drawable/summary_panel_bg"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/summary_title"
+                        android:textColor="@color/soft_text"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/goal_label"
+                                android:textColor="@color/muted_text" />
+
+                            <TextView
+                                android:id="@+id/summaryGoalValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textColor="@color/soft_text"
+                                android:textStyle="bold"
+                                tools:text="5.0 KM" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/target_label"
+                                android:textColor="@color/muted_text" />
+
+                            <TextView
+                                android:id="@+id/summaryTargetValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textColor="@color/electric_violet"
+                                android:textStyle="bold"
+                                tools:text="05:00 min/km" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/variance_label"
+                                android:textColor="@color/muted_text" />
+
+                            <TextView
+                                android:id="@+id/summaryVarianceValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textColor="@color/soft_text"
+                                tools:text="± 30s (Dynamic)" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/path_label"
+                                android:textColor="@color/muted_text" />
+
+                            <TextView
+                                android:id="@+id/summaryPathValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="end"
+                                android:textColor="@color/soft_text"
+                                tools:text="Random Generation" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/progressContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ProgressBar
                         android:id="@+id/progressBar"
@@ -152,85 +480,91 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:max="100"
-                        android:progress="0" />
+                        android:progress="0"
+                        android:progressTint="@color/electric_violet" />
 
                     <TextView
                         android:id="@+id/progressText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="0%" />
+                        android:layout_marginStart="10dp"
+                        android:text="0%"
+                        android:textColor="@color/soft_text"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Action Buttons -->
+                <Button
+                    android:id="@+id/startButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="18dp"
+                    android:backgroundTint="@color/signal_green"
+                    android:text="@string/start"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
                 <LinearLayout
+                    android:id="@+id/activeButtonRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:visibility="gone"
+                    android:weightSum="2">
 
                     <Button
-                        android:id="@+id/startStopButton"
+                        android:id="@+id/pauseButton"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="52dp"
                         android:layout_weight="1"
-                        android:text="Start"
-                        android:textColor="@android:color/white" />
+                        android:backgroundTint="@color/electric_violet"
+                        android:text="@string/pause"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/pauseResumeButton"
+                        android:id="@+id/stopButton"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:layout_marginStart="4dp"
-                        android:text="Pause"
-                        android:enabled="false" />
-
-                    <Button
-                        android:id="@+id/emergencyStopButton"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="4dp"
-                        android:text="E-STOP"
-                        android:backgroundTint="@android:color/holo_red_dark"
-                        android:textColor="@android:color/white" />
+                        android:backgroundTint="@color/signal_red"
+                        android:text="@string/stop"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/pauseButtonLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="end">
+                    android:layout_marginTop="18dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                    <ImageButton
-                        android:id="@+id/currentLocationButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Current Location"
-                        android:src="@android:drawable/ic_menu_mylocation" />
+                    <Button
+                        android:id="@+id/continueButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:backgroundTint="@color/electric_violet"
+                        android:text="@string/continue_run"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                    <ImageButton
-                        android:id="@+id/historyButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="History"
-                        android:src="@android:drawable/ic_menu_recent_history" />
-
-                    <ImageButton
-                        android:id="@+id/settingsButton"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginStart="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Settings"
-                        android:src="@android:drawable/ic_menu_preferences" />
+                    <Button
+                        android:id="@+id/pausedStopButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:layout_marginTop="10dp"
+                        android:backgroundTint="@color/signal_red"
+                        android:text="@string/stop"
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

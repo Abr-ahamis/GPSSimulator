@@ -48,10 +48,10 @@ class RouteEngine(
             else -> null
         }
 
-        val pace = paceEngine.randomPace()
+        val segmentDistance = previousPoint?.let { calculateDistanceMeters(it, rawPoint) } ?: 0.0
+        val pace = paceEngine.nextPaceSeconds(segmentDistance)
         val speed = paceEngine.paceToSpeed(pace)
         val delayBeforeMs = previousPoint?.let { previous ->
-            val segmentDistance = calculateDistanceMeters(previous, rawPoint)
             distanceTravelledMeters += segmentDistance
             ((segmentDistance / speed) * 1000.0).roundToLong().coerceIn(250L, 10_000L)
         } ?: 0L

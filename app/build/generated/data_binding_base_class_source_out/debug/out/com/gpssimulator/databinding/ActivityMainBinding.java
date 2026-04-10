@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +23,15 @@ import java.lang.Object;
 import org.osmdroid.views.MapView;
 
 public abstract class ActivityMainBinding extends ViewDataBinding {
+  @NonNull
+  public final LinearLayout activeButtonRow;
+
+  @NonNull
+  public final Button clearMapPointsButton;
+
+  @NonNull
+  public final Button continueButton;
+
   @NonNull
   public final CardView controlPanel;
 
@@ -41,13 +51,37 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   public final RadioGroup distanceGroup;
 
   @NonNull
-  public final Button emergencyStopButton;
+  public final Button distanceNextButton;
+
+  @NonNull
+  public final LinearLayout distanceSection;
 
   @NonNull
   public final ImageButton historyButton;
 
   @NonNull
+  public final TextView mapGuideText;
+
+  @NonNull
+  public final Button mapModeDoneButton;
+
+  @NonNull
+  public final LinearLayout mapModePanel;
+
+  @NonNull
+  public final TextView mapModeTitle;
+
+  @NonNull
   public final MapView mapView;
+
+  @NonNull
+  public final TextView paceHint;
+
+  @NonNull
+  public final Button paceNextButton;
+
+  @NonNull
+  public final LinearLayout paceSection;
 
   @NonNull
   public final Slider paceSlider;
@@ -56,10 +90,25 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   public final TextView paceText;
 
   @NonNull
-  public final Button pauseResumeButton;
+  public final TextView panelSubtitle;
+
+  @NonNull
+  public final TextView panelTitle;
+
+  @NonNull
+  public final Button pauseButton;
+
+  @NonNull
+  public final LinearLayout pauseButtonLayout;
+
+  @NonNull
+  public final Button pausedStopButton;
 
   @NonNull
   public final ProgressBar progressBar;
+
+  @NonNull
+  public final LinearLayout progressContainer;
 
   @NonNull
   public final TextView progressText;
@@ -68,10 +117,16 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   public final RadioButton routeDraw;
 
   @NonNull
+  public final Button routeNextButton;
+
+  @NonNull
   public final RadioButton routePins;
 
   @NonNull
   public final RadioButton routeRandom;
+
+  @NonNull
+  public final LinearLayout routeSection;
 
   @NonNull
   public final RadioGroup routeTypeGroup;
@@ -80,36 +135,90 @@ public abstract class ActivityMainBinding extends ViewDataBinding {
   public final ImageButton settingsButton;
 
   @NonNull
-  public final Button startStopButton;
+  public final Button startButton;
+
+  @NonNull
+  public final Button stopButton;
+
+  @NonNull
+  public final TextView summaryGoalValue;
+
+  @NonNull
+  public final LinearLayout summaryPanel;
+
+  @NonNull
+  public final TextView summaryPathValue;
+
+  @NonNull
+  public final TextView summaryTargetValue;
+
+  @NonNull
+  public final TextView summaryVarianceValue;
+
+  @NonNull
+  public final LinearLayout topActions;
 
   protected ActivityMainBinding(Object _bindingComponent, View _root, int _localFieldCount,
+      LinearLayout activeButtonRow, Button clearMapPointsButton, Button continueButton,
       CardView controlPanel, ImageButton currentLocationButton, RadioButton distance10km,
       RadioButton distance5km, RadioButton distanceCustom, RadioGroup distanceGroup,
-      Button emergencyStopButton, ImageButton historyButton, MapView mapView, Slider paceSlider,
-      TextView paceText, Button pauseResumeButton, ProgressBar progressBar, TextView progressText,
-      RadioButton routeDraw, RadioButton routePins, RadioButton routeRandom,
-      RadioGroup routeTypeGroup, ImageButton settingsButton, Button startStopButton) {
+      Button distanceNextButton, LinearLayout distanceSection, ImageButton historyButton,
+      TextView mapGuideText, Button mapModeDoneButton, LinearLayout mapModePanel,
+      TextView mapModeTitle, MapView mapView, TextView paceHint, Button paceNextButton,
+      LinearLayout paceSection, Slider paceSlider, TextView paceText, TextView panelSubtitle,
+      TextView panelTitle, Button pauseButton, LinearLayout pauseButtonLayout,
+      Button pausedStopButton, ProgressBar progressBar, LinearLayout progressContainer,
+      TextView progressText, RadioButton routeDraw, Button routeNextButton, RadioButton routePins,
+      RadioButton routeRandom, LinearLayout routeSection, RadioGroup routeTypeGroup,
+      ImageButton settingsButton, Button startButton, Button stopButton, TextView summaryGoalValue,
+      LinearLayout summaryPanel, TextView summaryPathValue, TextView summaryTargetValue,
+      TextView summaryVarianceValue, LinearLayout topActions) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.activeButtonRow = activeButtonRow;
+    this.clearMapPointsButton = clearMapPointsButton;
+    this.continueButton = continueButton;
     this.controlPanel = controlPanel;
     this.currentLocationButton = currentLocationButton;
     this.distance10km = distance10km;
     this.distance5km = distance5km;
     this.distanceCustom = distanceCustom;
     this.distanceGroup = distanceGroup;
-    this.emergencyStopButton = emergencyStopButton;
+    this.distanceNextButton = distanceNextButton;
+    this.distanceSection = distanceSection;
     this.historyButton = historyButton;
+    this.mapGuideText = mapGuideText;
+    this.mapModeDoneButton = mapModeDoneButton;
+    this.mapModePanel = mapModePanel;
+    this.mapModeTitle = mapModeTitle;
     this.mapView = mapView;
+    this.paceHint = paceHint;
+    this.paceNextButton = paceNextButton;
+    this.paceSection = paceSection;
     this.paceSlider = paceSlider;
     this.paceText = paceText;
-    this.pauseResumeButton = pauseResumeButton;
+    this.panelSubtitle = panelSubtitle;
+    this.panelTitle = panelTitle;
+    this.pauseButton = pauseButton;
+    this.pauseButtonLayout = pauseButtonLayout;
+    this.pausedStopButton = pausedStopButton;
     this.progressBar = progressBar;
+    this.progressContainer = progressContainer;
     this.progressText = progressText;
     this.routeDraw = routeDraw;
+    this.routeNextButton = routeNextButton;
     this.routePins = routePins;
     this.routeRandom = routeRandom;
+    this.routeSection = routeSection;
     this.routeTypeGroup = routeTypeGroup;
     this.settingsButton = settingsButton;
-    this.startStopButton = startStopButton;
+    this.startButton = startButton;
+    this.stopButton = stopButton;
+    this.summaryGoalValue = summaryGoalValue;
+    this.summaryPanel = summaryPanel;
+    this.summaryPathValue = summaryPathValue;
+    this.summaryTargetValue = summaryTargetValue;
+    this.summaryVarianceValue = summaryVarianceValue;
+    this.topActions = topActions;
   }
 
   @NonNull

@@ -4,6 +4,7 @@ import com.gpssimulator.data.model.LocationPoint
 import com.gpssimulator.data.model.PaceConfig
 import com.gpssimulator.data.model.Route
 import com.gpssimulator.data.network.OSRMService
+import com.gpssimulator.location.WalkingPathEnhancer
 import com.gpssimulator.utils.PolylineDecoder
 import kotlin.math.*
 import kotlin.random.Random
@@ -15,11 +16,12 @@ class RouteGenerator {
     suspend fun generateRandomRoute(
         startPoint: LocationPoint,
         totalDistance: Double,
-        paceConfig: PaceConfig
+        paceConfig: PaceConfig,
+        preferredBearingDegrees: Double? = null
     ): Route? {
         // Pick a random destination roughly totalDistance/2 away to make a return trip
         val targetDistance = totalDistance / 2.0
-        val randomBearing = Random.nextDouble() * 360.0
+        val randomBearing = preferredBearingDegrees ?: (Random.nextDouble() * 360.0)
         val destinationPoint = calculateDestinationPoint(startPoint, targetDistance, randomBearing)
 
         // Query OSRM for route from start -> destination -> start
@@ -60,11 +62,12 @@ class RouteGenerator {
             if (response.code == "Ok" && response.routes.isNotEmpty()) {
                 val osrmRoute = response.routes.first()
                 val decodedPoints = PolylineDecoder.decode(osrmRoute.geometry)
+                val enhancedPoints = WalkingPathEnhancer.enhance(decodedPoints)
                 
                 Route(
                     name = name,
-                    points = decodedPoints,
-                    totalDistance = osrmRoute.distance,
+                    points = enhancedPoints,
+                    totalDistance = calculateTotalDistance(enhancedPoints),
                     estimatedDuration = ((osrmRoute.distance / 1000.0) * paceConfig.baseSeconds * 1000).toLong(),
                     paceConfig = paceConfig
                 )

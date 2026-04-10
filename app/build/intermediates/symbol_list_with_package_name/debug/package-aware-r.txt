@@ -1439,6 +1439,7 @@ color dim_foreground_disabled_material_dark
 color dim_foreground_disabled_material_light
 color dim_foreground_material_dark
 color dim_foreground_material_light
+color electric_violet
 color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
@@ -2096,6 +2097,7 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
+color muted_text
 color notification_action_color_filter
 color notification_icon_bg_color
 color number_features_tile_border_color
@@ -2103,6 +2105,9 @@ color number_features_tile_circle_color
 color number_features_tile_circle_fill_color
 color number_features_tile_fill_color
 color number_features_tile_text_color
+color obsidian
+color panel_border
+color panel_surface
 color primary
 color primary_dark
 color primary_dark_material_dark
@@ -2123,6 +2128,9 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color signal_green
+color signal_red
+color soft_text
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -3050,6 +3058,7 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable control_panel_bg
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3169,9 +3178,11 @@ drawable previous
 drawable round_navigation_white_48
 drawable sharp_add_black_36
 drawable sharp_remove_black_36
+drawable summary_panel_bg
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable top_actions_bg
 drawable twotone_navigation_black_48
 drawable zoom_in
 drawable zoom_out
@@ -3244,6 +3255,7 @@ id action_mode_bar_stub
 id action_mode_close_button
 id action_text
 id actions
+id activeButtonRow
 id activity_chooser_view_content
 id add
 id adjust_height
@@ -3299,6 +3311,7 @@ id checked
 id chronometer
 id circle_center
 id clearButton
+id clearMapPointsButton
 id clear_text
 id clip_horizontal
 id clip_vertical
@@ -3312,6 +3325,7 @@ id container
 id content
 id contentPanel
 id contiguous
+id continueButton
 id continuousVelocity
 id controlPanel
 id coordinator
@@ -3350,6 +3364,8 @@ id distance10km
 id distance5km
 id distanceCustom
 id distanceGroup
+id distanceNextButton
+id distanceSection
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3368,7 +3384,6 @@ id edit_query
 id edit_text_id
 id elastic
 id embed
-id emergencyStopButton
 id emptyStateTextView
 id end
 id endToStart
@@ -3440,6 +3455,10 @@ id linear
 id listMode
 id list_item
 id m3_side_sheet
+id mapGuideText
+id mapModeDoneButton
+id mapModePanel
+id mapModeTitle
 id mapView
 id marquee
 id masked
@@ -3545,9 +3564,14 @@ id open_search_view_toolbar_container
 id outline
 id outward
 id overshoot
+id paceHint
+id paceNextButton
+id paceSection
 id paceSlider
 id paceText
 id packed
+id panelSubtitle
+id panelTitle
 id parallax
 id parent
 id parentPanel
@@ -3556,7 +3580,9 @@ id parent_matrix
 id password_toggle
 id path
 id pathRelative
-id pauseResumeButton
+id pauseButton
+id pauseButtonLayout
+id pausedStopButton
 id peekHeight
 id percent
 id pin
@@ -3564,6 +3590,7 @@ id position
 id postLayout
 id pressed
 id progressBar
+id progressContainer
 id progressText
 id progress_circular
 id progress_horizontal
@@ -3582,8 +3609,10 @@ id routeDistanceTextView
 id routeDraw
 id routeDurationTextView
 id routeNameTextView
+id routeNextButton
 id routePins
 id routeRandom
+id routeSection
 id routeStatusTextView
 id routeTypeGroup
 id routeTypeTextView
@@ -3642,16 +3671,22 @@ id src_in
 id src_over
 id standard
 id start
+id startButton
 id startHorizontal
-id startStopButton
 id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
 id stop
+id stopButton
 id stretch
 id submenuarrow
 id submit_area
+id summaryGoalValue
+id summaryPanel
+id summaryPathValue
+id summaryTargetValue
+id summaryVarianceValue
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3691,6 +3726,7 @@ id title_template
 id toggle
 id toolbar
 id top
+id topActions
 id topPanel
 id touch_outside
 id transitionToEnd
@@ -4013,6 +4049,7 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string compass
+string continue_run
 string current_location
 string cyclemap
 string distance_10km
@@ -4048,6 +4085,7 @@ string format_distance_value_unit
 string geopackage_db_rollback_journal_suffix
 string geopackage_db_shared_memory_suffix
 string geopackage_db_write_ahead_log_suffix
+string goal_label
 string hide_bottom_view_on_scroll_behavior
 string hills
 string history
@@ -4169,10 +4207,12 @@ string notifications
 string notifications_desc
 string offline
 string password_toggle_content_description
+string path_label
 string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string pause
 string public_transport
 string roads_nl
 string route_circular
@@ -4197,10 +4237,14 @@ string simulation_stopped
 string snapshot
 string speed_variation
 string speed_variation_desc
+string start
 string start_simulation
 string states
 string status_bar_notification_info_overflow
+string stop
 string stop_simulation
+string summary_title
+string target_label
 string tile_generator_variable_max_lat
 string tile_generator_variable_max_lon
 string tile_generator_variable_min_lat
@@ -4213,6 +4257,8 @@ string title_activity_main
 string title_activity_settings
 string topo
 string unknown
+string variance_dynamic
+string variance_label
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

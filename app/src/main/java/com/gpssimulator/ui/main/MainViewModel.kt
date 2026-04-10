@@ -7,8 +7,10 @@ import com.gpssimulator.data.model.LocationPoint
 import com.gpssimulator.data.model.PaceConfig
 import com.gpssimulator.data.model.Route
 import com.gpssimulator.service.RouteGenerator
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.withContext
 
 enum class RouteType {
     RANDOM, PINS, DRAW
@@ -36,6 +38,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     private val _paceConfig = MutableStateFlow(PaceConfig(330)) // Default 05:30
     val paceConfig: StateFlow<PaceConfig> = _paceConfig
+
+    private val _headingDegrees = MutableStateFlow<Double?>(null)
+    val headingDegrees: StateFlow<Double?> = _headingDegrees
     
     private val _routeType = MutableStateFlow(RouteType.RANDOM)
     val routeType: StateFlow<RouteType> = _routeType
@@ -54,6 +59,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     fun setPaceConfig(paceSeconds: Int) {
         _paceConfig.value = PaceConfig(paceSeconds)
+    }
+
+    fun setHeadingDegrees(headingDegrees: Double?) {
+        _headingDegrees.value = headingDegrees
     }
     
     fun setRouteType(type: RouteType) {
@@ -90,32 +99,37 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     
     suspend fun generateRoute(startPoint: LocationPoint): Route? {
         return try {
-            val route = when (_routeType.value) {
-                RouteType.RANDOM -> {
-                    routeGenerator.generateRandomRoute(
-                        startPoint = startPoint,
-                        totalDistance = _distance.value,
-                        paceConfig = _paceConfig.value
-                    )
-                }
-                RouteType.PINS -> {
-                    if (_customPoints.value.isEmpty()) return null
-                    routeGenerator.generateCustomRouteFromPins(
-                        pins = listOf(startPoint) + _customPoints.value,
-                        paceConfig = _paceConfig.value
-                    )
-                }
-                RouteType.DRAW -> {
-                    if (_customPoints.value.isEmpty()) return null
-                    routeGenerator.generateCustomDrawnRoute(
-                        points = listOf(startPoint) + _customPoints.value,
-                        paceConfig = _paceConfig.value
-                    )
+            val route = withContext(Dispatchers.IO) {
+                when (_routeType.value) {
+                    RouteType.RANDOM -> {
+                        routeGenerator.generateRandomRoute(
+                            startPoint = startPoint,
+                            totalDistance = _distance.value,
+                            paceConfig = _paceConfig.value,
+                            preferredBearingDegrees = _headingDegrees.value
+                        )
+                    }
+                    RouteType.PINS -> {
+                        if (_customPoints.value.isEmpty()) return@withContext null
+                        routeGenerator.generateCustomRouteFromPins(
+                            pins = listOf(startPoint) + _customPoints.value,
+                            paceConfig = _paceConfig.value
+                        )
+                    }
+                    RouteType.DRAW -> {
+                        if (_customPoints.value.isEmpty()) return@withContext null
+                        routeGenerator.generateCustomDrawnRoute(
+                            points = listOf(startPoint) + _customPoints.value,
+                            paceConfig = _paceConfig.value
+                        )
+                    }
                 }
             } ?: return null
             
             // Save route to database
-            val routeId = app.routeRepository.insertRoute(route)
+            val routeId = withContext(Dispatchers.IO) {
+                app.routeRepository.insertRoute(route)
+            }
             
             route.copy(id = routeId)
         } catch (e: Exception) {

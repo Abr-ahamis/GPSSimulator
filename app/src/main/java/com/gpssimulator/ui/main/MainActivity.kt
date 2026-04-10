@@ -5,10 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -37,17 +42,39 @@ import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.Polyline
 import androidx.lifecycle.lifecycleScope
 import android.Manifest
+import java.util.Locale
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SensorEventListener {
+    private enum class DashboardMode {
+        SETUP,
+        READY,
+        ACTIVE,
+        PAUSED
+    }
+
+    private enum class SetupStep {
+        DISTANCE,
+        PACE,
+        ROUTE,
+        SUMMARY
+    }
     
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
     private lateinit var locationUtils: LocationUtils
+    private lateinit var sensorManager: SensorManager
+    private var rotationSensor: Sensor? = null
+    private var smoothedHeadingDegrees: Double? = null
     
     private lateinit var mapView: MapView
     private lateinit var mapController: IMapController
     private var currentLocationMarker: Marker? = null
     private var routePolyline: Polyline? = null
+    private var setupStep = SetupStep.DISTANCE
+    private var isGeneratingRoute = false
+    private var hasConfirmedDistance = false
+    private var hasConfirmedPace = false
+    private var hasConfirmedRoute = false
     
     private var locationSimulationService: LocationSimulationService? = null
     private var isServiceBound = false
@@ -89,11 +116,15 @@ class MainActivity : AppCompatActivity() {
         Configuration.getInstance().userAgentValue = packageName
         
         locationUtils = LocationUtils(this)
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
         NotificationHelper.createNotificationChannel(this)
         
         setupMap()
         setupUI()
         observeViewModel()
+        updateSummaryPanel()
+        updateDashboardMode(DashboardMode.SETUP)
         
         checkAndRequestLocationPermissions()
     }
@@ -190,15 +221,31 @@ class MainActivity : AppCompatActivity() {
                         showCustomDistanceDialog()
                     }
                 }
+                hasConfirmedDistance = true
+                updateSummaryPanel()
+                updateDashboardMode(currentDashboardMode())
+            }
+
+            distanceNextButton.setOnClickListener {
+                hasConfirmedDistance = true
+                setupStep = SetupStep.PACE
+                updateDashboardMode(currentDashboardMode())
             }
             
             // Pace selector
             paceSlider.addOnChangeListener { _, value, _ ->
                 val paceSeconds = value.toInt()
                 viewModel.setPaceConfig(paceSeconds)
-                val m = paceSeconds / 60
-                val s = paceSeconds % 60
-                paceText.text = String.format("%02d:%02d", m, s)
+                paceText.text = formatPace(paceSeconds)
+                hasConfirmedPace = true
+                updateSummaryPanel()
+                updateDashboardMode(currentDashboardMode())
+            }
+
+            paceNextButton.setOnClickListener {
+                hasConfirmedPace = true
+                setupStep = SetupStep.ROUTE
+                updateDashboardMode(currentDashboardMode())
             }
             
             // Route type selector
@@ -211,28 +258,34 @@ class MainActivity : AppCompatActivity() {
                 }
                 viewModel.setRouteType(routeType)
                 clearCustomMapPoints() // Clear custom points when switching modes
+                hasConfirmedRoute = true
+                updateSummaryPanel()
+                updateDashboardMode(currentDashboardMode())
+            }
+
+            routeNextButton.setOnClickListener {
+                hasConfirmedRoute = true
+                setupStep = SetupStep.SUMMARY
+                updateDashboardMode(currentDashboardMode())
+            }
+
+            mapModeDoneButton.setOnClickListener {
+                hasConfirmedRoute = true
+                setupStep = SetupStep.SUMMARY
+                updateDashboardMode(currentDashboardMode())
+            }
+
+            clearMapPointsButton.setOnClickListener {
+                clearCustomMapPoints()
             }
             
-            // Start/Stop button
-            startStopButton.setOnClickListener {
-                if (viewModel.isSimulating.value) {
-                    stopSimulation()
-                } else {
-                    startSimulation()
-                }
-            }
+            startButton.setOnClickListener { startSimulation() }
             
-            pauseResumeButton.setOnClickListener {
-                if (viewModel.isPaused.value) {
-                    resumeSimulation()
-                } else {
-                    pauseSimulation()
-                }
-            }
+            pauseButton.setOnClickListener { pauseSimulation() }
+            continueButton.setOnClickListener { resumeSimulation() }
             
-            emergencyStopButton.setOnClickListener {
-                stopSimulation()
-            }
+            stopButton.setOnClickListener { stopSimulation() }
+            pausedStopButton.setOnClickListener { stopSimulation() }
             
             // Navigation buttons
             historyButton.setOnClickListener {
@@ -248,6 +301,8 @@ class MainActivity : AppCompatActivity() {
                 getCurrentLocationAndCenter()
             }
         }
+
+        binding.paceText.text = formatPace(viewModel.paceConfig.value.baseSeconds)
     }
     
     private fun observeViewModel() {
@@ -323,32 +378,23 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun updateUIForSimulationState(isSimulating: Boolean, isPaused: Boolean) {
-        binding.apply {
-            startStopButton.text = if (isSimulating) "Stop" else "Start"
-            startStopButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    this@MainActivity,
-                    if (isSimulating) android.R.color.holo_red_dark else android.R.color.holo_green_dark
-                )
-            )
-            
-            pauseResumeButton.isEnabled = isSimulating
-            pauseResumeButton.text = if (isPaused) "Resume" else "Pause"
-            
-            // Disable controls during simulation
-            distanceGroup.isEnabled = !isSimulating
-            paceSlider.isEnabled = !isSimulating
-            routeTypeGroup.isEnabled = !isSimulating
-            
-            progressBar.isIndeterminate = false
-            if (!isSimulating) {
-                progressBar.progress = 0
-                progressText.text = "0%"
-            }
+        binding.progressBar.isIndeterminate = false
+        if (!isSimulating) {
+            binding.progressBar.progress = 0
+            binding.progressText.text = "0%"
         }
+
+        val mode = when {
+            isSimulating && isPaused -> DashboardMode.PAUSED
+            isSimulating -> DashboardMode.ACTIVE
+            hasConfirmedPace -> currentDashboardMode()
+            else -> DashboardMode.SETUP
+        }
+        updateDashboardMode(mode)
     }
     
     private fun startSimulation() {
+        if (isGeneratingRoute) return
         if (!locationUtils.hasLocationPermission()) {
             Toast.makeText(this, "Location permission required", Toast.LENGTH_SHORT).show()
             return
@@ -368,10 +414,19 @@ class MainActivity : AppCompatActivity() {
         
         lifecycleScope.launch {
             try {
+                isGeneratingRoute = true
+                binding.startButton.isEnabled = false
+                binding.startButton.text = "Preparing..."
                 val route = viewModel.generateRoute(currentLocation)
                 route?.let {
                     drawRouteOnMap(it)
                     startLocationSimulationService(it)
+                } ?: run {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Please add route points first",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
                 Toast.makeText(
@@ -379,6 +434,10 @@ class MainActivity : AppCompatActivity() {
                     "Failed to generate route: ${e.message}",
                     Toast.LENGTH_LONG
                 ).show()
+            } finally {
+                isGeneratingRoute = false
+                binding.startButton.isEnabled = true
+                binding.startButton.text = getString(R.string.start)
             }
         }
     }
@@ -395,6 +454,11 @@ class MainActivity : AppCompatActivity() {
         routePolyline = null
         clearCustomMapPoints()
         mapView.invalidate()
+        setupStep = SetupStep.DISTANCE
+        hasConfirmedDistance = false
+        hasConfirmedPace = false
+        hasConfirmedRoute = false
+        updateDashboardMode(currentDashboardMode())
     }
     
     private fun pauseSimulation() {
@@ -485,6 +549,7 @@ class MainActivity : AppCompatActivity() {
                 if (distance != null && distance > 0) {
                     viewModel.setDistance(distance * 1000) // Convert km to meters
                     binding.distanceCustom.text = "${distanceText} km"
+                    updateSummaryPanel()
                 } else {
                     Toast.makeText(this, "Invalid distance", Toast.LENGTH_SHORT).show()
                 }
@@ -496,13 +561,151 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        rotationSensor?.let {
+            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI)
+        }
         bindToSimulationService()
     }
     
     override fun onPause() {
         super.onPause()
         mapView.onPause()
+        sensorManager.unregisterListener(this)
         unbindFromSimulationService()
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type != Sensor.TYPE_ROTATION_VECTOR) return
+
+        val rotationMatrix = FloatArray(9)
+        SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values)
+        val orientation = FloatArray(3)
+        SensorManager.getOrientation(rotationMatrix, orientation)
+        val rawHeading = (Math.toDegrees(orientation[0].toDouble()) + 360.0) % 360.0
+        smoothedHeadingDegrees = smoothHeading(smoothedHeadingDegrees, rawHeading)
+        viewModel.setHeadingDegrees(smoothedHeadingDegrees)
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) = Unit
+
+    private fun smoothHeading(current: Double?, next: Double): Double {
+        if (current == null) return next
+        val delta = (((next - current) + 540.0) % 360.0) - 180.0
+        return (current + delta * 0.2 + 360.0) % 360.0
+    }
+
+    private fun currentDashboardMode(): DashboardMode {
+        return when {
+            SimulationState.isSimulating.value && SimulationState.isPaused.value -> DashboardMode.PAUSED
+            SimulationState.isSimulating.value -> DashboardMode.ACTIVE
+            setupStep == SetupStep.SUMMARY && hasConfirmedDistance && hasConfirmedPace && hasConfirmedRoute -> DashboardMode.READY
+            else -> DashboardMode.SETUP
+        }
+    }
+
+    private fun updateDashboardMode(mode: DashboardMode) {
+        binding.apply {
+            val isSimulating = mode == DashboardMode.ACTIVE || mode == DashboardMode.PAUSED
+
+            distanceGroup.isEnabled = !isSimulating
+            distanceNextButton.isEnabled = !isSimulating
+            paceSlider.isEnabled = !isSimulating
+            paceNextButton.isEnabled = !isSimulating
+            routeTypeGroup.isEnabled = !isSimulating
+            routeNextButton.isEnabled = !isSimulating
+
+            val showFullMapRouteMode = !isSimulating &&
+                setupStep == SetupStep.ROUTE &&
+                (viewModel.routeType.value == RouteType.PINS || viewModel.routeType.value == RouteType.DRAW)
+
+            setSectionVisible(distanceSection, !isSimulating && setupStep == SetupStep.DISTANCE)
+            setSectionVisible(paceSection, !isSimulating && setupStep == SetupStep.PACE)
+            setSectionVisible(routeSection, !isSimulating && setupStep == SetupStep.ROUTE && !showFullMapRouteMode)
+            setSectionVisible(summaryPanel, !isSimulating && setupStep == SetupStep.SUMMARY)
+            setSectionVisible(mapModePanel, showFullMapRouteMode)
+
+            setSectionVisible(startButton, mode == DashboardMode.READY)
+            setSectionVisible(activeButtonRow, mode == DashboardMode.ACTIVE)
+            setSectionVisible(pauseButtonLayout, mode == DashboardMode.PAUSED)
+            setSectionVisible(progressContainer, isSimulating)
+            setSectionVisible(controlPanel, isSimulating || !showFullMapRouteMode)
+
+            if (showFullMapRouteMode) {
+                mapModeTitle.text = if (viewModel.routeType.value == RouteType.PINS) "Pin Route" else "Draw Route"
+                mapGuideText.text = if (viewModel.routeType.value == RouteType.PINS) {
+                    "Tap the map to place pins, then press Review Setup."
+                } else {
+                    "Tap along the map to shape the route, then press Review Setup."
+                }
+            }
+
+            panelTitle.text = when (mode) {
+                DashboardMode.SETUP -> "Runner Control"
+                DashboardMode.READY -> "Ready To Launch"
+                DashboardMode.ACTIVE -> "Run In Progress"
+                DashboardMode.PAUSED -> "Run Paused"
+            }
+            panelSubtitle.text = when (mode) {
+                DashboardMode.SETUP -> "Choose distance, pace, then route type."
+                DashboardMode.READY -> "Summary locked. Press start when ready."
+                DashboardMode.ACTIVE -> "Pause or stop the active simulation."
+                DashboardMode.PAUSED -> "Continue the run or stop it."
+            }
+        }
+    }
+
+    private fun updateSummaryPanel() {
+        binding.summaryGoalValue.text = String.format(Locale.getDefault(), "%.1f KM", viewModel.distance.value / 1000.0)
+        binding.summaryTargetValue.text = "${formatPace(viewModel.paceConfig.value.baseSeconds)} min/km"
+        binding.summaryVarianceValue.text = getString(R.string.variance_dynamic)
+        binding.summaryPathValue.text = when (viewModel.routeType.value) {
+            RouteType.RANDOM -> "Random Generation"
+            RouteType.PINS -> "Pinned Waypoints"
+            RouteType.DRAW -> "Drawn Path"
+        }
+    }
+
+    private fun formatPace(paceSeconds: Int): String {
+        val m = paceSeconds / 60
+        val s = paceSeconds % 60
+        return String.format(Locale.getDefault(), "%02d:%02d", m, s)
+    }
+
+    private fun revealView(view: View, animate: Boolean = true) {
+        if (view.visibility == View.VISIBLE) return
+        view.visibility = View.VISIBLE
+        if (animate) {
+            view.alpha = 0f
+            view.translationY = 24f
+            view.animate()
+                .alpha(1f)
+                .translationY(0f)
+                .setDuration(220L)
+                .start()
+        } else {
+            view.alpha = 1f
+            view.translationY = 0f
+        }
+    }
+
+    private fun popIn(view: View) {
+        view.scaleX = 0.92f
+        view.scaleY = 0.92f
+        view.alpha = 0f
+        view.animate()
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(180L)
+            .start()
+    }
+
+    private fun setSectionVisible(view: View, visible: Boolean) {
+        view.visibility = if (visible) View.VISIBLE else View.GONE
+        if (visible) {
+            view.alpha = 1f
+            view.translationY = 0f
+        }
     }
     
     private fun bindToSimulationService() {

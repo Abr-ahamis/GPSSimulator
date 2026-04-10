@@ -21,7 +21,7 @@ data class OSRMRoute(
 )
 
 interface OSRMService {
-    @GET("route/v1/driving/{coordinates}")
+    @GET("route/v1/foot/{coordinates}")
     suspend fun getRoute(
         @Path("coordinates", encoded = true) coordinates: String, // lon,lat;lon,lat
         @Query("overview") overview: String = "full",

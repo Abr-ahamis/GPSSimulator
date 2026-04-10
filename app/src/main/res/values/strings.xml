@@ -53,4 +53,14 @@
     <!-- Errors -->
     <string name="error_getting_location">Failed to get current location</string>
     <string name="error_generating_route">Failed to generate route</string>
+    <string name="goal_label">Goal</string>
+    <string name="target_label">Target</string>
+    <string name="variance_label">Variance</string>
+    <string name="path_label">Path</string>
+    <string name="summary_title">Route Summary</string>
+    <string name="variance_dynamic">± 30s (Dynamic)</string>
+    <string name="pause">Pause</string>
+    <string name="continue_run">Continue</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
 </resources>
