@@ -1,11 +1,11 @@
 package com.gpssimulator.data.network
 
-import com.google.gson.annotations.SerializedName
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -25,11 +25,15 @@ interface OSRMService {
     suspend fun getRoute(
         @Path("coordinates", encoded = true) coordinates: String, // lon,lat;lon,lat
         @Query("overview") overview: String = "full",
-        @Query("geometries") geometries: String = "polyline"
+        @Query("geometries") geometries: String = "polyline",
+        @Header("User-Agent") userAgent: String = USER_AGENT
     ): OSRMResponse
 
     companion object {
-        private const val BASE_URL = "http://router.project-osrm.org/"
+        // OpenStreetMap Germany hosts this public, open-source OSRM walking profile.
+        // HTTPS avoids Android 9+ clear-text traffic failures and the service needs no API key.
+        private const val BASE_URL = "https://routing.openstreetmap.de/routed-foot/"
+        private const val USER_AGENT = "GPSimulator/1.0 (Android)"
 
         fun create(): OSRMService {
             val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }

@@ -53,7 +53,9 @@ class RouteEngine(
         val speed = paceEngine.paceToSpeed(pace)
         val delayBeforeMs = previousPoint?.let { previous ->
             distanceTravelledMeters += segmentDistance
-            ((segmentDistance / speed) * 1000.0).roundToLong().coerceIn(250L, 10_000L)
+            // Android and the fused provider filter rapid, near-identical updates.
+            // One-second steps give walking/running simulations stable, believable delivery.
+            ((segmentDistance / speed) * 1000.0).roundToLong().coerceIn(1_000L, 10_000L)
         } ?: 0L
 
         simulatedElapsedMs += delayBeforeMs

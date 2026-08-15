@@ -1,0 +1,37 @@
+# Android and Gradle build output
+.gradle/
+**/build/
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+
+# Local Android SDK configuration and signing material
+local.properties
+*.keystore
+*.jks
+*.p12
+*.pem
+
+# IDE, native-build, and device-capture files
+.idea/
+*.iml
+.externalNativeBuild/
+.cxx/
+captures/
+*.hprof
+
+# OS files and temporary/editor files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# Accidental non-source files currently at the repository root
+/A
+/Android
+/Get
+/Run
+/Task
+/app/{build.gradle}

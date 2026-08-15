@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -34,7 +35,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
-import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.tileprovider.tilesource.XYTileSource
 import org.osmdroid.util.BoundingBox
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             applicationContext,
             getSharedPreferences("osmdroid", Context.MODE_PRIVATE)
         )
-        Configuration.getInstance().userAgentValue = packageName
+        Configuration.getInstance().userAgentValue = "$packageName (GPSimulator Android app)"
         
         locationUtils = LocationUtils(this)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -131,7 +132,25 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     
     private fun setupMap() {
         mapView = binding.mapView
-        mapView.setTileSource(TileSourceFactory.MAPNIK)
+        // OpenStreetMap France provides an open-data, HTTPS raster tile service with no API key.
+        // Use its three public hosts so a single unavailable host does not blank the map.
+        mapView.setTileSource(
+            XYTileSource(
+                "OpenStreetMapFrance",
+                0,
+                20,
+                256,
+                ".png",
+                arrayOf(
+                    "https://a.tile.openstreetmap.fr/osmfr/",
+                    "https://b.tile.openstreetmap.fr/osmfr/",
+                    "https://c.tile.openstreetmap.fr/osmfr/"
+                ),
+                "© OpenStreetMap contributors, tiles by OpenStreetMap France"
+            )
+        )
+        // Request tiles at the screen density so the map remains sharp on high-DPI phones.
+        mapView.setTilesScaledToDpi(true)
         mapView.setMultiTouchControls(true)
         
         mapController = mapView.controller
@@ -394,19 +413,25 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
     
     private fun startSimulation() {
-        if (isGeneratingRoute) return
+        if (isGeneratingRoute) {
+            Log.w(TAG, "Start ignored: route generation is already in progress")
+            return
+        }
         if (!locationUtils.hasLocationPermission()) {
+            Log.w(TAG, "Start blocked: fine location permission is missing")
             Toast.makeText(this, "Location permission required", Toast.LENGTH_SHORT).show()
             return
         }
         
         if (!locationUtils.isLocationEnabled()) {
+            Log.w(TAG, "Start blocked: phone location is disabled")
             Toast.makeText(this, "Please enable GPS", Toast.LENGTH_SHORT).show()
             return
         }
         
         val currentLocation = viewModel.currentLocation.value
         if (currentLocation == null) {
+            Log.i(TAG, "Start deferred: requesting current location")
             Toast.makeText(this, "Getting current location...", Toast.LENGTH_SHORT).show()
             getCurrentLocationAndCenter()
             return
@@ -417,11 +442,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 isGeneratingRoute = true
                 binding.startButton.isEnabled = false
                 binding.startButton.text = "Preparing..."
+                Log.i(TAG, "Generating ${viewModel.routeType.value} route")
                 val route = viewModel.generateRoute(currentLocation)
                 route?.let {
+                    Log.i(TAG, "Route ready: distance=${it.totalDistance.toInt()}m, points=${it.getAllPoints().size}")
                     drawRouteOnMap(it)
                     startLocationSimulationService(it)
                 } ?: run {
+                    Log.w(TAG, "Route generation returned no route")
                     Toast.makeText(
                         this@MainActivity,
                         "Please add route points first",
@@ -429,6 +457,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     ).show()
                 }
             } catch (e: Exception) {
+                Log.e(TAG, "Route generation failed", e)
                 Toast.makeText(
                     this@MainActivity,
                     "Failed to generate route: ${e.message}",
@@ -443,6 +472,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
     
     private fun stopSimulation() {
+        Log.i(TAG, "Stop requested from the UI")
         val intent = Intent(this, LocationSimulationService::class.java).apply {
             action = LocationSimulationService.ACTION_STOP_SIMULATION
         }
@@ -462,6 +492,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
     
     private fun pauseSimulation() {
+        Log.i(TAG, "Pause requested from the UI")
         val intent = Intent(this, LocationSimulationService::class.java).apply {
             action = "pause_simulation"
         }
@@ -470,6 +501,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
     
     private fun resumeSimulation() {
+        Log.i(TAG, "Resume requested from the UI")
         val intent = Intent(this, LocationSimulationService::class.java).apply {
             action = "resume_simulation"
         }
@@ -500,6 +532,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
     
     private fun startLocationSimulationService(route: com.gpssimulator.data.model.Route) {
+        Log.i(TAG, "Starting simulation service: routeId=${route.id}")
         val intent = Intent(this, LocationSimulationService::class.java).apply {
             action = LocationSimulationService.ACTION_START_SIMULATION
             putExtra("route", route)
@@ -749,6 +782,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
     
     companion object {
+        private const val TAG = "GPSimulatorUI"
         private const val REQUEST_LOCATION_PERMISSIONS = 100
         private const val REQUEST_BACKGROUND_LOCATION_PERMISSION = 101
     }

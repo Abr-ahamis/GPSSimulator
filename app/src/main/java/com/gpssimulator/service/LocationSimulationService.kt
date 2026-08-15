@@ -6,10 +6,10 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.location.Location
-import android.location.LocationManager
 import android.os.Build
 import android.os.IBinder
+import android.os.Looper
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.gpssimulator.GPSimulatorApp
 import com.gpssimulator.R
@@ -19,8 +19,10 @@ import com.gpssimulator.location.RouteEngine
 import com.gpssimulator.utils.NotificationHelper
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,7 +32,6 @@ class LocationSimulationService : Service() {
     
     private val serviceScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var locationManager: LocationManager
     
     private var simulationJob: Job? = null
     private var currentRoute: Route? = null
@@ -50,14 +51,16 @@ class LocationSimulationService : Service() {
     val progress: StateFlow<Float> = _progress
     
     private lateinit var locationCallback: LocationCallback
-    private var mockProviderRegistered = false
+    private var mockModeEnabled = false
+    private var mockModeEnabling = false
+    private var highAccuracyUpdatesActive = false
+    private var injectedPointCount = 0
     
     override fun onCreate() {
         super.onCreate()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        
         setupLocationCallback()
+        Log.i(TAG, "Service created")
         startForeground(NOTIFICATION_ID, createNotification())
     }
     
@@ -71,18 +74,20 @@ class LocationSimulationService : Service() {
                     intent.getParcelableExtra("route")
                 }
                 route?.let { startSimulation(it) }
+                    ?: Log.e(TAG, "Start command rejected: route was missing")
             }
             "pause_simulation" -> pauseSimulation()
             "resume_simulation" -> resumeSimulation()
             ACTION_STOP_SIMULATION -> stopSimulation()
         }
-        return START_STICKY
+        // Never recreate a simulation after Android has stopped the service.
+        return START_NOT_STICKY
     }
     
     private fun setupLocationCallback() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                // Tracking if needed
+                Log.d(TAG, "High-accuracy location update received")
             }
         }
     }
@@ -93,6 +98,7 @@ class LocationSimulationService : Service() {
         currentRoute = route
         routeEngine = RouteEngine(route)
         startTime = System.currentTimeMillis()
+        injectedPointCount = 0
         
         _isSimulating.value = true
         _isPaused.value = false
@@ -100,6 +106,9 @@ class LocationSimulationService : Service() {
         SimulationState.setPaused(false)
         SimulationState.setProgress(0f)
         updateNotification("Simulating ${route.name}")
+        Log.i(TAG, "Simulation started: routeId=${route.id}, points=${route.getAllPoints().size}")
+
+        enableHighAccuracyUpdates()
         
         launchSimulationLoop()
     }
@@ -116,12 +125,14 @@ class LocationSimulationService : Service() {
         SimulationState.setPaused(true)
         simulationJob?.cancel()
         updateNotification("Simulation Paused")
+        Log.i(TAG, "Simulation paused")
     }
 
     private fun resumeSimulation() {
         _isPaused.value = false
         SimulationState.setPaused(false)
         updateNotification("Simulation Resumed")
+        Log.i(TAG, "Simulation resumed")
         launchSimulationLoop()
     }
     
@@ -153,31 +164,45 @@ class LocationSimulationService : Service() {
     }
     
     private fun setMockLocation(locationPoint: LocationPoint) {
-        try {
-            val mockLocation = locationPoint.toLocation()
-            fusedLocationClient.setMockMode(true)
-            fusedLocationClient.setMockLocation(mockLocation)
+        val mockLocation = locationPoint.toLocation()
 
-            if (!mockProviderRegistered) {
-                try {
-                    locationManager.addTestProvider(
-                        LocationManager.GPS_PROVIDER,
-                        false, false, false, false,
-                        true, true, true, 0, 5
-                    )
-                    mockProviderRegistered = true
-                } catch (_: Exception) {
-                    // Some devices reject replacing the built-in GPS provider.
-                }
-            }
-
-            if (mockProviderRegistered) {
-                locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, true)
-                locationManager.setTestProviderLocation(LocationManager.GPS_PROVIDER, mockLocation)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        if (mockModeEnabled) {
+            injectMockLocation(mockLocation)
+            return
         }
+
+        if (mockModeEnabling) {
+            Log.d(TAG, "Waiting for fused mock mode to become active")
+            return
+        }
+
+        mockModeEnabling = true
+        fusedLocationClient.setMockMode(true)
+            .addOnSuccessListener {
+                mockModeEnabling = false
+                mockModeEnabled = true
+                Log.i(TAG, "Fused mock mode enabled")
+                injectMockLocation(mockLocation)
+            }
+            .addOnFailureListener { error ->
+                mockModeEnabling = false
+                Log.e(TAG, "Fused mock mode was rejected. Select this app in Developer options > Mock location app.", error)
+                stopSimulation()
+            }
+    }
+
+    private fun injectMockLocation(mockLocation: android.location.Location) {
+        fusedLocationClient.setMockLocation(mockLocation)
+            .addOnSuccessListener {
+            injectedPointCount++
+            if (injectedPointCount == 1 || injectedPointCount % LOCATION_LOG_INTERVAL == 0) {
+                Log.i(TAG, "Mock location injected: point=$injectedPointCount, accuracy=${mockLocation.accuracy}m")
+            }
+            }
+            .addOnFailureListener { error ->
+                Log.e(TAG, "Mock location injection failed", error)
+                stopSimulation()
+            }
     }
     
     private fun completeSimulation() {
@@ -197,6 +222,7 @@ class LocationSimulationService : Service() {
         }
         
         updateNotification("Simulation completed")
+        Log.i(TAG, "Simulation completed: injectedPoints=$injectedPointCount")
         cleanupMockProvider()
         
         serviceScope.launch {
@@ -214,26 +240,42 @@ class LocationSimulationService : Service() {
         cleanupMockProvider()
         
         updateNotification("Simulation stopped")
+        Log.i(TAG, "Simulation stopped: injectedPoints=$injectedPointCount")
         stopSelf()
     }
 
-    private fun cleanupMockProvider() {
+    private fun enableHighAccuracyUpdates() {
+        if (highAccuracyUpdatesActive) return
+
         try {
-            fusedLocationClient.setMockMode(false)
-        } catch (e: Exception) {
-            e.printStackTrace()
+            val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2_000L)
+                .setMinUpdateIntervalMillis(1_000L)
+                .setWaitForAccurateLocation(true)
+                .build()
+            fusedLocationClient.requestLocationUpdates(request, locationCallback, Looper.getMainLooper())
+            highAccuracyUpdatesActive = true
+            Log.i(TAG, "High-accuracy location updates requested")
+        } catch (e: SecurityException) {
+            Log.w(TAG, "Location permission unavailable for high-accuracy updates", e)
+        }
+    }
+
+    private fun cleanupMockProvider() {
+        if (highAccuracyUpdatesActive) {
+            fusedLocationClient.removeLocationUpdates(locationCallback)
+            highAccuracyUpdatesActive = false
+            Log.i(TAG, "High-accuracy location updates stopped")
         }
 
         try {
-            if (mockProviderRegistered) {
-                locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, false)
-                locationManager.removeTestProvider(LocationManager.GPS_PROVIDER)
-                mockProviderRegistered = false
+            if (mockModeEnabled) {
+                fusedLocationClient.setMockMode(false)
+                    .addOnSuccessListener { Log.i(TAG, "Fused mock mode disabled; normal phone location restored") }
+                    .addOnFailureListener { error -> Log.e(TAG, "Unable to disable fused mock mode", error) }
+                mockModeEnabled = false
             }
-        } catch (e: IllegalArgumentException) {
-            mockProviderRegistered = false
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e(TAG, "Unable to disable fused mock mode", e)
         }
     }
     
@@ -264,13 +306,22 @@ class LocationSimulationService : Service() {
     }
     
     override fun onDestroy() {
+        Log.i(TAG, "Service destroyed; cleaning up location state")
         super.onDestroy()
         simulationJob?.cancel()
         serviceScope.cancel()
         cleanupMockProvider()
     }
+
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        Log.i(TAG, "Task removed; cleaning up location state")
+        stopSimulation()
+        super.onTaskRemoved(rootIntent)
+    }
     
     companion object {
+        private const val TAG = "LocationSimulation"
+        private const val LOCATION_LOG_INTERVAL = 10
         const val NOTIFICATION_ID = 1
         const val ACTION_START_SIMULATION = "start_simulation"
         const val ACTION_STOP_SIMULATION = "stop_simulation"
